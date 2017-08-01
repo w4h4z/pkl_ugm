@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page" style="background-image: url(<?php echo base_url(); ?>assets/images/login_bg.jpeg);background-attachment: fixed;background-position: center;background-size:100%">
-<div class="col-xs-8 col-xs-offset-2 bg-col bg-col1">
+<div class="col-xs-8 col-xs-offset-2 bg-col">
 <div class="login-box mar-top">
   <div class="login-logo mar-bot">
     <img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" class="logo-ugm"><br><b class="header">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
@@ -67,6 +67,11 @@
       <div class="form-group has-feedback">
         <input type="password" class="form-control" placeholder="Password" name="password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group">
+        <p id="captImg"><?php echo $captchaImg; ?></p>
+        <input type="text" class="form-control" name="captcha" placeholder="Captcha" style="margin-bottom: 5px"/>
+        <a href="<?php echo base_url(); ?>index.php/auth/refresh_login" class="refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
       </div>
       <div class="row">
         <!-- /.col -->

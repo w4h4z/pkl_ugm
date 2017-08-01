@@ -49,7 +49,7 @@
                     <td>'.$data->NIS.'</td>
                     <td>'.$data->ASAL_SMK.'</td>
                     <td>'.$data->JURUSAN.'</td>
-                    <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'" style="margin-right: 5px">Detail</button><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'" style="margin-right: 5px">Detail</button><a href="#" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
                   </tr>
 
                 ';}

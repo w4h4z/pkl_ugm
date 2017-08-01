@@ -158,10 +158,10 @@
         <span class="glyphicon glyphicon-picture form-control-feedback"></span>
       </div>
       <div class="form-group">
-      <label>Captcha</label>
-      <p id="captImg"><?php echo $captchaImg; ?></p>
-      <a href="<?php echo base_url(); ?>index.php/auth/refresh" class="refreshCaptcha" ><i class="glyphicon glyphicon-refresh"></i></a>
-      <input type="text" name="captcha" placeholder="Captcha" />
+        <label>Captcha</label>
+        <p id="captImg"><?php echo $captchaImg; ?></p>
+        <input type="text" class="form-control" name="captcha" placeholder="Captcha" style="margin-bottom: 5px"/>
+        <a href="<?php echo base_url(); ?>index.php/auth/refresh" class="refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
       </div>
       <div class="row">
         <!-- /.col -->

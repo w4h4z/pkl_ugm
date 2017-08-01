@@ -16,27 +16,52 @@ class Auth extends CI_Controller {
 		if($this->session->userdata('logged_in') == TRUE){
 			redirect(base_url('index.php/auth/dashboard'));
 		} else {
-			$this->load->view('login_view');
+			// Captcha configuration
+	        $config = array(
+	            'img_path'      => 'captcha_images/',
+	            'img_url'       => base_url().'captcha_images/',
+	            'img_width'     => '100',
+	            'img_height'    => 30,
+	            'word_length'   => 4,
+	            'font_size'     => 16
+	        );
+	        $captcha = create_captcha($config);
+	        
+	        // Unset previous captcha and store new captcha word
+	        $this->session->unset_userdata('captchaCode');
+	        $this->session->set_userdata('captchaCode',$captcha['word']);
+	        
+	        // Send captcha image to view
+	        $data['captchaImg'] = $captcha['image'];
+			$this->load->view('login_view', $data);
 		}
 		//$this->load->view('login_view');
 	}
 
 	public function login()
 	{
-		if($this->admin_model->login() == TRUE){
-			if($this->session->userdata('ROLE') == 'Admin'){
-				redirect('auth/dashboard');
-			} else {
-				if($this->session->userdata('STATUS') == 'verified'){
-					redirect('auth/profile');
+		$inputCaptcha = $this->input->post('captcha');
+        $sessCaptcha = $this->session->userdata('captchaCode');
+
+        if($inputCaptcha === $sessCaptcha){
+			if($this->admin_model->login() == TRUE){
+				if($this->session->userdata('ROLE') == 'Admin'){
+					redirect('auth/dashboard');
 				} else {
-					redirect('auth/verifikasi/');
+					if($this->session->userdata('STATUS') == 'verified'){
+						redirect('auth/profile');
+					} else {
+						redirect('auth/verifikasi/');
+					}
 				}
+			} else {
+				$this->session->set_flashdata('notif', 'Login Gagal, Username/Password Salah');
+	            redirect('auth');
 			}
-		} else {
-			$this->session->set_flashdata('notif', 'Login Gagal, Username/Password Salah');
-            redirect('auth');
-		}
+        } else {
+        	$this->session->set_flashdata('notif', 'Captcha code was not match, please try again');
+	           redirect('auth');
+        }
 	}
 
 	public function logout()
@@ -44,7 +69,7 @@ class Auth extends CI_Controller {
 		$data = array('USERNAME' => '', 'logged_in' => FALSE);
 
 		$this->session->sess_destroy();
-		$this->load->view('login_view');
+		redirect('auth');
 	}
 
 	public function register()
@@ -90,6 +115,28 @@ class Auth extends CI_Controller {
         echo $captcha['image'];
 
         redirect(base_url('index.php/auth/register'));
+    }
+
+    public function refresh_login(){
+        // Captcha configuration
+        $config = array(
+            'img_path'      => 'captcha_images/',
+            'img_url'       => base_url().'captcha_images/',
+            'img_width'     => '150',
+            'img_height'    => 50,
+            'word_length'   => 8,
+            'font_size'     => 16
+        );
+        $captcha = create_captcha($config);
+        
+        // Unset previous captcha and store new captcha word
+        $this->session->unset_userdata('captchaCode');
+        $this->session->set_userdata('captchaCode',$captcha['word']);
+        
+        // Display captcha image
+        echo $captcha['image'];
+
+        redirect(base_url('index.php/auth'));
     }
 
 	public function dashboard()
