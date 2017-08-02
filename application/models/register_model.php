@@ -9,7 +9,7 @@ class Register_model extends CI_Model {
 					   'PASSWORD' 		=> $this->input->post('password'),
 					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
 					   'ROLE'			=> 'Siswa',
-					   'STATUS'				=> 'unverified'
+					   'STATUS'			=> 'unverified'
 						);
 
 		$this->db->insert('tb_akun', $data1);
@@ -57,6 +57,16 @@ class Register_model extends CI_Model {
 		$this->db->order_by('tb_siswa.SISWA_ID', 'ASC');
 
 		return $this->db->get()->result();
+	}
+
+	public function get_detail_siswa($id)
+	{
+		$this->db->where('tb_siswa.SISWA_ID', $id);
+		$this->db->from('tb_siswa');
+		$this->db->join('tb_akun', 'tb_akun.SISWA_ID = tb_siswa.SISWA_ID');
+		$this->db->order_by('tb_siswa.SISWA_ID', 'ASC');
+
+		return $this->db->get()->row();
 	}
 
 	public function total_records()
@@ -153,6 +163,52 @@ class Register_model extends CI_Model {
 		$this->db->where('ID_KEGSIS', $id)->delete('tb_kegiatansiswa');
 
 		if($this->db->affected_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function del_siswa($id)
+	{
+		$this->db->where('SISWA_ID', $id)->delete('tb_siswa');
+		$this->db->where('SISWA_ID', $id)->delete('tb_akun');
+
+		if($this->db->affected_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function edit_siswa($id)
+	{
+		$data1 = array('USERNAME' 		=> $this->input->post('username'),
+					   'PASSWORD' 		=> $this->input->post('password'),
+					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
+						);
+
+		$this->db->where('SISWA_ID', $id)->update('tb_akun', $data1);
+
+		$data = array('NIS'					=> $this->input->post('nis'),
+					  'NAMA_SISWA'			=> $this->input->post('nama'),
+					  'JENKEL_SISWA'		=> $this->input->post('jenkel'),
+					  'TEMPATLAHIR_SISWA '  => $this->input->post('tempatlahir'), 
+					  'TANGGALLAHIR_SISWA'	=> $this->input->post('tgl_lhr'),
+					  'AGAMA_SISWA'			=> $this->input->post('agama'),
+					  'ALAMAT_SISWA'		=> $this->input->post('alamatsiswa'),
+					  'NOHP_SISWA'			=> $this->input->post('nohp'),
+					  'ASAL_SMK'			=> $this->input->post('asal'),
+					  'JURUSAN'				=> $this->input->post('jurusan'),
+					  'NOTELP_SMK'			=> $this->input->post('notelp'),
+					  'ALAMAT_SMK'			=> $this->input->post('alamatsekolah'),
+					  'TGL_MULAI'			=> $this->input->post('tgl_mulai'),
+					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai'),
+					  );
+	
+		$this->db->where('SISWA_ID', $id)->update('tb_siswa', $data);
+
+		if ($this->db->affected_rows() > 0) {
 			return TRUE;
 		} else {
 			return FALSE;

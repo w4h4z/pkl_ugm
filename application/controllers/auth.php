@@ -21,9 +21,9 @@ class Auth extends CI_Controller {
 	            'img_path'      => 'captcha_images/',
 	            'img_url'       => base_url().'captcha_images/',
 	            'img_width'     => '100',
-	            'img_height'    => 30,
-	            'word_length'   => 4,
-	            'font_size'     => 16
+	            'img_height'    => '30',
+	            'word_length'   => '4',
+	            'font_size'     => '16'
 	        );
 	        $captcha = create_captcha($config);
 	        
@@ -79,9 +79,9 @@ class Auth extends CI_Controller {
             'img_path'      => 'captcha_images/',
             'img_url'       => base_url().'captcha_images/',
             'img_width'     => '100',
-            'img_height'    => 30,
-            'word_length'   => 4,
-            'font_size'     => 16
+            'img_height'    => '30',
+            'word_length'   => '4',
+            'font_size'     => '16'
         );
         $captcha = create_captcha($config);
         
@@ -101,9 +101,9 @@ class Auth extends CI_Controller {
             'img_path'      => 'captcha_images/',
             'img_url'       => base_url().'captcha_images/',
             'img_width'     => '150',
-            'img_height'    => 50,
-            'word_length'   => 8,
-            'font_size'     => 16
+            'img_height'    => '50',
+            'word_length'   => '8',
+            'font_size'     => '16'
         );
         $captcha = create_captcha($config);
         
@@ -123,9 +123,9 @@ class Auth extends CI_Controller {
             'img_path'      => 'captcha_images/',
             'img_url'       => base_url().'captcha_images/',
             'img_width'     => '150',
-            'img_height'    => 50,
-            'word_length'   => 8,
-            'font_size'     => 16
+            'img_height'    => '50',
+            'word_length'   => '8',
+            'font_size'     => '16'
         );
         $captcha = create_captcha($config);
         
@@ -228,11 +228,51 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	public function del_kegiatan_dashboard($id)
+	{
+		if($this->register_model->del_kegiatan($id) == TRUE){
+			$this->session->set_flashdata('notif1', 'Kegiatan Berhasil Dihapus');
+			redirect('auth/data_kegiatan');
+		} else {
+			$this->session->set_flashdata('notif', 'Kegiatan Gagal Dihapus');
+			redirect('auth/data_kegiatan');
+		}
+	}
+
 	public function data_kegiatan()
 	{
 		$data['kegiatan'] = $this->register_model->all_kegiatan();
 		$data['main_view'] = 'kegiatan_view';
 		$this->load->view('template', $data);
+	}
+
+	public function edit_siswa($id)
+	{
+		$data['siswa'] = $this->register_model->get_detail_siswa($id);
+		$data['main_view'] = 'edit_siswa_view';
+		$this->load->view('template', $data);
+	}
+
+	public function del_siswa($id)
+	{
+		if($this->register_model->del_siswa($id) == TRUE){
+			$this->session->set_flashdata('notif1', 'Siswa Berhasil Dihapus');
+			redirect('auth/data_siswa');
+		} else {
+			$this->session->set_flashdata('notif', 'Siswa Gagal Dihapus');
+			redirect('auth/data_siswa');
+		}
+	}
+
+	public function edit_siswa_submit($id)
+	{
+		if($this->register_model->edit_siswa($id) == TRUE){
+			$this->session->set_flashdata('notif1', 'Edit data berhasil');
+			redirect('auth/data_siswa');
+		} else {
+			$this->session->set_flashdata('notif', 'Edit data gagal');
+            redirect('auth/data_siswa');
+		}
 	}
 
 }

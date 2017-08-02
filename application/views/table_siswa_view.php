@@ -19,6 +19,26 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Siswa PKL</h3>
+            
+            <?php
+              $notif = $this->session->flashdata('notif');
+                if(!empty($notif)){
+                  echo '<div class="alert alert-danger alert-dismissable">';
+                  echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                  echo '<i class="icon fa fa-warning"></i>';
+                  echo $notif;
+                  echo '</div>';
+                }
+
+              $notif1 = $this->session->flashdata('notif1');
+              if(!empty($notif1)){
+                  echo '<div class="alert alert-success alert-dismissable">';
+                  echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                  echo '<i class="icon fa fa-check"></i>';
+                  echo $notif1;
+                  echo '</div>';
+              }
+            ?>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -49,7 +69,7 @@
                     <td>'.$data->NIS.'</td>
                     <td>'.$data->ASAL_SMK.'</td>
                     <td>'.$data->JURUSAN.'</td>
-                    <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'" style="margin-right: 5px">Detail</button><a href="#" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'" style="margin-right: 5px">Detail</button><a href="'.base_url().'index.php/auth/edit_siswa/'.$data->SISWA_ID.'" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="'.base_url().'index.php/auth/del_siswa/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger">Delete</a></td>
                   </tr>
 
                 ';}
@@ -84,7 +104,7 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Username</label>
-                        <input type="text" class="form-control" name="username" value="'.$data->NAMA_SISWA.'" disabled>
+                        <input type="text" class="form-control" name="username" value="'.$data->USERNAME.'" disabled>
                       </div>
                       <div class="form-group">
                         <label>Password</label>
@@ -140,7 +160,7 @@
                       </div>
                       <div class="form-group">
                         <label>Alamat SMK</label>
-                        <textarea class="form-control" name="alamatsmk" disabled>'.$data->ALAMAT_SMK.'</textarea>
+                        <textarea class="form-control" name="alamatsekolah" disabled>'.$data->ALAMAT_SMK.'</textarea>
                       </div>
                       <div class="form-group">
                         <label>Tanggal Mulai</label>

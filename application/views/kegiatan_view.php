@@ -25,6 +25,27 @@
                     PKL <small>UGM</small>
                   </span>
             </li>
+            <li>
+            <?php
+              $notif = $this->session->flashdata('notif');
+                if(!empty($notif)){
+                  echo '<div class="alert alert-danger alert-dismissable col-md-6 col-md-offset-1">';
+                  echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                  echo '<i class="icon fa fa-warning"></i>';
+                  echo $notif;
+                  echo '</div>';
+                }
+
+              $notif1 = $this->session->flashdata('notif1');
+              if(!empty($notif1)){
+                  echo '<div class="alert alert-success alert-dismissable col-md-6 col-md-offset-1">';
+                  echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                  echo '<i class="icon fa fa-check"></i>';
+                  echo $notif1;
+                  echo '</div>';
+              }
+            ?>
+            </li>
             <!-- /.timeline-label -->
             <!-- timeline item -->
             <?php 
@@ -42,8 +63,8 @@
                           '.$data->ISI_KEGSIS.'
                         </div>
                         <div class="timeline-footer">
-                          <a href="#" class="btn btn-primary btn-xs">Read more</a>
-                          <a href="#" class="btn btn-danger btn-xs">Delete</a>
+                          <a href="#" data-toggle="modal" data-target="#readmore'.$data->ID_KEGSIS.'" class="btn btn-primary btn-xs">Read more</a>
+                          <a href="'.base_url().'index.php/auth/del_kegiatan_dashboard/'.$data->ID_KEGSIS.'" class="btn btn-danger btn-xs">Delete</a>
                         </div>
                       </div>
                     </li>
@@ -64,3 +85,47 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
+<?php
+  foreach ($kegiatan as $data) {
+    echo '
+  
+              <div class="modal fade" id="readmore'.$data->ID_KEGSIS.'">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Aktivitas Siswa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-solid">
+                          <div class="box-header with-border">
+                            <i class="fa fa-user"></i>
+
+                            <b><h2 class="box-title">'.$data->NAMA_SISWA.'</h2></b><small> - '.$data->ASAL_SMK.'</small>
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body">
+                            <blockquote>
+                              <p>'.$data->ISI_KEGSIS.'</p>
+                              <small>Created date <cite title="Source Title">'.$data->TGL_KEGSIS.'</cite></small>
+                            </blockquote>
+                          </div>
+                          <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->  
+
+  ';}
+?>
