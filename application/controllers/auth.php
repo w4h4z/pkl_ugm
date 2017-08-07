@@ -7,14 +7,15 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('admin_model');
-		$this->load->model('register_model');
+		$this->load->model('auth_model');
+		$this->load->model('siswa_model');
 		$this->load->helper('captcha');
 	}
 
 	public function index()
 	{
 		if($this->session->userdata('logged_in') == TRUE){
-			redirect(base_url('index.php/auth/dashboard'));
+			redirect(base_url('index.php/admin/dashboard'));
 		} else {
 			// Captcha configuration
 	        $config = array(
@@ -35,7 +36,35 @@ class Auth extends CI_Controller {
 	        $data['captchaImg'] = $captcha['image'];
 			$this->load->view('login_view', $data);
 		}
-		//$this->load->view('login_view');
+	}
+
+	public function daftar()
+	{	
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['max_size']  = '2000';
+		$this->load->library('upload', $config);
+
+		$inputCaptcha = $this->input->post('captcha');
+        $sessCaptcha = $this->session->userdata('captchaCode');
+
+        if($inputCaptcha === $sessCaptcha){
+            if($this->upload->do_upload('identitas')){
+				if($this->auth_model->simpan($this->upload->data()) == TRUE){
+					$this->session->set_flashdata('notif1', 'Pendaftaran Berhasil, Silahkan Log In');
+		            redirect('auth');
+				} else {
+					$this->session->set_flashdata('notif', 'Pendaftaran Gagal');
+		            redirect('auth/register');
+				}
+			} else {
+				$this->session->set_flashdata('notif', $this->upload->display_errors());
+		        redirect('auth/register');
+			}
+        }else{
+            $this->session->set_flashdata('notif', 'Captcha code was not match, please try again');
+		    redirect('auth/register');
+        }
 	}
 
 	public function login()
@@ -44,14 +73,14 @@ class Auth extends CI_Controller {
         $sessCaptcha = $this->session->userdata('captchaCode');
 
         if($inputCaptcha === $sessCaptcha){
-			if($this->admin_model->login() == TRUE){
+			if($this->auth_model->login() == TRUE){
 				if($this->session->userdata('ROLE') == 'Admin'){
-					redirect('auth/dashboard');
+					redirect('admin/dashboard');
 				} else {
 					if($this->session->userdata('STATUS') == 'verified'){
-						redirect('auth/profile');
+						redirect('siswa/profile');
 					} else {
-						redirect('auth/verifikasi/');
+						redirect('auth/verifikasi');
 					}
 				}
 			} else {
@@ -139,14 +168,21 @@ class Auth extends CI_Controller {
         redirect(base_url('index.php/auth'));
     }
 
-	public function dashboard()
+    public function verifikasi()
+	{
+		$id = $this->session->userdata('SISWA_ID');
+		$data['profil'] = $this->siswa_model->profil($id);
+		$this->load->view('verifikasi_view', $data);
+	}
+
+	/*public function dashboard()
 	{
 		if($this->session->userdata('logged_in') == TRUE){
 			if($this->session->userdata('ROLE') == 'Admin'){
-				$data['siswa'] = $this->register_model->get_data_siswa();
-				$data['total'] = $this->register_model->total_records();
-				$data['total_v'] = $this->register_model->total_verified();
-				$data['total_u'] = $this->register_model->total_unverified();
+				$data['siswa'] = $this->auth_model->get_data_siswa();
+				$data['total'] = $this->auth_model->total_records();
+				$data['total_v'] = $this->auth_model->total_verified();
+				$data['total_u'] = $this->auth_model->total_unverified();
 				$data['main_view'] = 'dashboard_view';
 				$this->load->view('template', $data);
 			} else {
@@ -155,60 +191,53 @@ class Auth extends CI_Controller {
 		} else {
 			$this->load->view('login_view');
 		}
-	}
+	}*/
 
-	public function data_siswa()
+	/*public function data_siswa()
 	{
-		$data['siswa'] = $this->register_model->get_data_siswa();
+		$data['siswa'] = $this->auth_model->get_data_siswa();
 		$data['main_view'] = 'table_siswa_view';
 		$this->load->view('template', $data);
-	}
+	}*/
 
-	public function profile()
+	/*public function profile()
 	{
 		if($this->session->userdata('logged_in') == TRUE){
 			$id = $this->session->userdata('SISWA_ID');
-			$data['profil'] = $this->register_model->profil($id);
-			$data['kegiatan'] = $this->register_model->get_kegiatan($id);
+			$data['profil'] = $this->auth_model->profil($id);
+			$data['kegiatan'] = $this->auth_model->get_kegiatan($id);
 			$this->load->view('profile_view', $data);
 		} else {
 			$this->load->view('login_view');
 		}	
-	}
+	}*/
 
-	public function verifikasi()
+	/*public function verified($id)
 	{
-		$id = $this->session->userdata('SISWA_ID');
-		$data['profil'] = $this->register_model->profil($id);
-		$this->load->view('verifikasi_view', $data);
-	}
-
-	public function verified($id)
-	{
-		if($this->register_model->verified($id) == TRUE){
+		if($this->auth_model->verified($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Approval Success');
-			redirect('auth/dashboard');
+			redirect('admin/dashboard');
 		} else {
 			$this->session->set_flashdata('notif', 'Approval Failed');
-            redirect('auth/dashboard');
+            redirect('admin/dashboard');
 		}
 	}
 
 	public function unverified($id)
 	{
-		if($this->register_model->unverified($id) == TRUE){
+		if($this->auth_model->unverified($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Delete Success');
-			redirect('auth/dashboard');
+			redirect('admin/dashboard');
 		} else {
 			$this->session->set_flashdata('notif', 'Delete Failed');
-			redirect('auth/dashboard');
+			redirect('admin/dashboard');
 		}
-	}
+	}*/
 
-	public function kegiatan()
+	/*public function kegiatan()
 	{
 		$id = $this->session->userdata('SISWA_ID');
-		if($this->register_model->kegiatan($id) == TRUE){
+		if($this->auth_model->kegiatan($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Berhasil Menulis Kegiatan');
 			redirect('auth/profile');
 		} else {
@@ -219,43 +248,43 @@ class Auth extends CI_Controller {
 
 	public function del_kegiatan($id)
 	{
-		if($this->register_model->del_kegiatan($id) == TRUE){
+		if($this->auth_model->del_kegiatan($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Kegiatan Berhasil Dihapus');
 			redirect('auth/profile');
 		} else {
 			$this->session->set_flashdata('notif', 'Kegiatan Gagal Dihapus');
 			redirect('auth/profile');
 		}
-	}
+	}*/
 
-	public function del_kegiatan_dashboard($id)
+	/*public function del_kegiatan_dashboard($id)
 	{
-		if($this->register_model->del_kegiatan($id) == TRUE){
+		if($this->auth_model->del_kegiatan($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Kegiatan Berhasil Dihapus');
-			redirect('auth/data_kegiatan');
+			redirect('admin/data_kegiatan');
 		} else {
 			$this->session->set_flashdata('notif', 'Kegiatan Gagal Dihapus');
-			redirect('auth/data_kegiatan');
+			redirect('admin/data_kegiatan');
 		}
-	}
+	}*/
 
-	public function data_kegiatan()
+	/*public function data_kegiatan()
 	{
-		$data['kegiatan'] = $this->register_model->all_kegiatan();
+		$data['kegiatan'] = $this->auth_model->all_kegiatan();
 		$data['main_view'] = 'kegiatan_view';
 		$this->load->view('template', $data);
-	}
+	}*/
 
-	public function edit_siswa($id)
+	/*public function edit_siswa($id)
 	{
-		$data['siswa'] = $this->register_model->get_detail_siswa($id);
+		$data['siswa'] = $this->auth_model->get_detail_siswa($id);
 		$data['main_view'] = 'edit_siswa_view';
 		$this->load->view('template', $data);
 	}
 
 	public function del_siswa($id)
 	{
-		if($this->register_model->del_siswa($id) == TRUE){
+		if($this->auth_model->del_siswa($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Siswa Berhasil Dihapus');
 			redirect('auth/data_siswa');
 		} else {
@@ -266,7 +295,7 @@ class Auth extends CI_Controller {
 
 	public function edit_siswa_submit($id)
 	{
-		if($this->register_model->edit_siswa($id) == TRUE){
+		if($this->auth_model->edit_siswa($id) == TRUE){
 			$this->session->set_flashdata('notif1', 'Edit data berhasil');
 			redirect('auth/data_siswa');
 		} else {
@@ -274,6 +303,13 @@ class Auth extends CI_Controller {
             redirect('auth/data_siswa');
 		}
 	}
+
+	public function data_admin()
+	{
+		$data['admin'] = $this->auth_model->get_data_admin();
+		$data['main_view'] = 'table_admin_view';
+		$this->load->view('template', $data);
+	}*/
 
 }
 

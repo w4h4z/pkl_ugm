@@ -64,7 +64,7 @@
                         </div>
                         <div class="timeline-footer">
                           <a href="#" data-toggle="modal" data-target="#readmore'.$data->ID_KEGSIS.'" class="btn btn-primary btn-xs">Read more</a>
-                          <a href="'.base_url().'index.php/auth/del_kegiatan_dashboard/'.$data->ID_KEGSIS.'" class="btn btn-danger btn-xs">Delete</a>
+                          <a href="'.base_url().'index.php/admin/del_kegiatan_dashboard/'.$data->ID_KEGSIS.'" class="btn btn-danger btn-xs">Delete</a>
                         </div>
                       </div>
                     </li>

@@ -64,7 +64,7 @@
         }
     ?>
 
-    <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/register/simpan">
+    <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/auth/daftar">
       <div class="form-group has-feedback">
         <label>Username</label>
         <input type="text" class="form-control" placeholder="Username" name="username" required>

@@ -231,7 +231,7 @@
                     <img src="'.base_url().'assets/images/blank.png" class="img-circle img-bordered-sm" alt="User Image">
                         <span class="username">
                           <a href="#">'.$data->NAMA_SISWA.'</a>
-                          <a href="'.base_url().'index.php/auth/del_kegiatan/'.$data->ID_KEGSIS.'" class="pull-right btn-box-tool"><i class="fa fa-trash"></i></a>
+                          <a href="'.base_url().'index.php/siswa/del_kegiatan/'.$data->ID_KEGSIS.'" class="pull-right btn-box-tool"><i class="fa fa-trash"></i></a>
                         </span>
                     <span class="description">'.$data->TGL_KEGSIS.'</span>
                   </div>
@@ -247,7 +247,7 @@
               <!-- /.tab-pane -->
             
               <div class="tab-pane" id="settings">
-                <form method="post" action="<?php echo base_url(); ?>index.php/auth/kegiatan" class="form-horizontal">
+                <form method="post" action="<?php echo base_url(); ?>index.php/siswa/kegiatan" class="form-horizontal">
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Tanggal</label>
                     <div class="col-sm-10">

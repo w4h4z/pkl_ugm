@@ -134,7 +134,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="<?php echo base_url('index.php/auth/dashboard'); ?>">
+          <a href="<?php echo base_url('index.php/admin/dashboard'); ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -147,11 +147,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url(); ?>index.php/auth/data_siswa"><i class="fa fa-circle-o"></i> Siswa <i class="fa fa-user pull-right"></i></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Petugas <i class="fa fa-key pull-right"></i></a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/admin/data_siswa"><i class="fa fa-circle-o"></i> Siswa <i class="fa fa-user pull-right"></i></a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/admin/data_admin"><i class="fa fa-circle-o"></i> Petugas <i class="fa fa-key pull-right"></i></a></li>
           </ul>
           <li>
-            <a href="<?php echo base_url('index.php/auth/data_kegiatan'); ?>">
+            <a href="<?php echo base_url('index.php/admin/data_kegiatan'); ?>">
             <i class="fa fa-comments"></i> <span>Kegiatan</span>
           </a>
           </li>

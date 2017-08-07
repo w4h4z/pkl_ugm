@@ -26,7 +26,7 @@
             <div class="icon">
               <i class="ion ion-person"></i>
             </div>
-            <a href="<?php echo base_url(); ?>index.php/auth/data_siswa" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>index.php/admin/data_siswa" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -124,7 +124,7 @@
                         <li>
                           <img src="'.base_url().'assets/images/blank.png" style="max-width: 80px" alt="User Image">
                           <a class="users-list-name" href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">'.$data->NAMA_SISWA.'</a>
-                          <a href="'.base_url().'index.php/auth/verified/'.$data->SISWA_ID.'" class="btn btn-sm btn-primary">Accept</a><a href="'.base_url().'index.php/auth/unverified/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger" style="margin-left: 1px">x</a>
+                          <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-sm btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger" style="margin-left: 1px">x</a>
                         </li>
                       ';}
                     }
@@ -267,7 +267,7 @@
                             <li>
                               <img src="'.base_url().'assets/images/blank.png" style="max-width: 80px" alt="User Image">
                               <a class="users-list-name" href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">'.$data->NAMA_SISWA.'</a>
-                              <a href="'.base_url().'index.php/auth/verified/'.$data->SISWA_ID.'" class="btn btn-sm btn-primary">Accept</a><a href="'.base_url().'index.php/auth/unverified/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger" style="margin-left: 1px">x</a>
+                              <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-sm btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger" style="margin-left: 1px">x</a>
                             </li>
                           ';}
                         }
