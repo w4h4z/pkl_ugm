@@ -51,18 +51,18 @@ class Auth extends CI_Controller {
         if($inputCaptcha === $sessCaptcha){
             if($this->upload->do_upload('identitas')){
 				if($this->auth_model->simpan($this->upload->data()) == TRUE){
-					$this->session->set_flashdata('notif1', 'Pendaftaran Berhasil, Silahkan Log In');
+					$this->session->set_flashdata('success', 'Pendaftaran Berhasil, Silahkan Log In');
 		            redirect('auth');
 				} else {
-					$this->session->set_flashdata('notif', 'Pendaftaran Gagal');
+					$this->session->set_flashdata('failed', 'Pendaftaran Gagal');
 		            redirect('auth/register');
 				}
 			} else {
-				$this->session->set_flashdata('notif', $this->upload->display_errors());
+				$this->session->set_flashdata('failed', $this->upload->display_errors());
 		        redirect('auth/register');
 			}
         }else{
-            $this->session->set_flashdata('notif', 'Captcha code was not match, please try again');
+            $this->session->set_flashdata('failed', 'Captcha code was not match, please try again');
 		    redirect('auth/register');
         }
 	}
@@ -84,11 +84,11 @@ class Auth extends CI_Controller {
 					}
 				}
 			} else {
-				$this->session->set_flashdata('notif', 'Login Gagal, Username/Password Salah');
+				$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
 	            redirect('auth');
 			}
         } else {
-        	$this->session->set_flashdata('notif', 'Captcha code was not match, please try again');
+        	$this->session->set_flashdata('failed', 'Captcha code was not match, please try again');
 	           redirect('auth');
         }
 	}

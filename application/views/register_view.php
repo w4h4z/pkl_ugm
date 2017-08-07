@@ -54,12 +54,12 @@
     <p class="login-box-msg">Create an account</p>
 
     <?php
-      $notif = $this->session->flashdata('notif');
-        if(!empty($notif)){
+      $failed = $this->session->flashdata('failed');
+        if(!empty($failed)){
           echo '<div class="alert alert-danger alert-dismissable">';
           echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
           echo '<i class="icon fa fa-warning"></i>';
-          echo $notif;
+          echo $failed;
           echo '</div>';
         }
     ?>

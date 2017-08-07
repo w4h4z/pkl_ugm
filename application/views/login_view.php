@@ -40,24 +40,24 @@
     <p class="login-box-msg">Log in to your account</p>
 
     <?php
-      $notif = $this->session->flashdata('notif');
-        if(!empty($notif)){
-          echo '<div class="alert alert-danger alert-dismissable">';
-          echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-          echo '<i class="icon fa fa-warning"></i>';
-          echo $notif;
-          echo '</div>';
-        }
+                  $failed = $this->session->flashdata('failed');
+                    if(!empty($failed)){
+                      echo '<div class="alert alert-danger alert-dismissable">';
+                      echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                      echo '<i class="icon fa fa-warning"></i>';
+                      echo $failed;
+                      echo '</div>';
+                    }
 
-      $notif1 = $this->session->flashdata('notif1');
-      if(!empty($notif1)){
-          echo '<div class="alert alert-success alert-dismissable">';
-          echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
-          echo '<i class="icon fa fa-check"></i>';
-          echo $notif1;
-          echo '</div>';
-      }
-    ?>
+                  $success = $this->session->flashdata('success');
+                  if(!empty($success)){
+                      echo '<div class="alert alert-success alert-dismissable">';
+                      echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                      echo '<i class="icon fa fa-check"></i>';
+                      echo $success;
+                      echo '</div>';
+                  }
+                ?>
 
     <form action="<?php echo base_url(); ?>index.php/auth/login/" method="post">
       <div class="form-group has-feedback">
