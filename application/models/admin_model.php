@@ -177,6 +177,55 @@ class Admin_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function get_detail_petugas($id)
+	{
+		$this->db->where('tb_pembimbing.PEMBIMBING_ID', $id);
+		$this->db->from('tb_pembimbing');
+		$this->db->join('tb_akun_admin', 'tb_akun_admin.PEMBIMBING_ID = tb_pembimbing.PEMBIMBING_ID');
+		$this->db->order_by('tb_pembimbing.PEMBIMBING_ID', 'ASC');
+
+		return $this->db->get()->row();
+	}
+
+	public function edit_petugas($id)
+	{
+		$data1 = array('USERNAME' 		=> $this->input->post('username'),
+					   'PASSWORD' 		=> $this->input->post('password'),
+					   'ACCOUNT_EMAIL'	=> $this->input->post('email')
+						);
+
+		$this->db->where('PEMBIMBING_ID', $id)->update('tb_akun_admin', $data1);
+
+		$data = array('NIP'							=> $this->input->post('nip'),
+					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
+					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
+					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
+					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat')
+					  );
+	
+		$this->db->where('PEMBIMBING_ID', $id)->update('tb_pembimbing', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+
+	public function del_petugas($id)
+	{
+		$this->db->where('PEMBIMBING_ID', $id)->delete('tb_pembimbing');
+		$this->db->where('PEMBIMBING_ID', $id)->delete('tb_akun_admin');
+
+		if($this->db->affected_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 }
 
 /* End of file admin_model.php */

@@ -75,7 +75,7 @@
                     <td>'.$data->NOHP_PEMBIMBING.'</td>
                     <td>'.$data->ACCOUNT_EMAIL.'</td>
                     <td>'.$data->ALAMAT_PEMBIMBING.'</td>
-                    <td><a href="#" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+                    <td><a href="'.base_url().'index.php/admin/edit_petugas/'.$data->PEMBIMBING_ID.'" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="'.base_url().'index.php/admin/del_petugas/'.$data->PEMBIMBING_ID.'" class="btn btn-sm btn-danger">Delete</a></td>
                   </tr>
 
                 ';}

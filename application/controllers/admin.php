@@ -143,6 +143,35 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function edit_petugas($id)
+	{
+		$data['petugas'] = $this->admin_model->get_detail_petugas($id);
+		$data['main_view'] = 'edit_admin_view';
+		$this->load->view('template', $data);
+	}
+
+	public function edit_petugas_submit($id)
+	{
+		if($this->admin_model->edit_petugas($id) == TRUE){
+			$this->session->set_flashdata('success', 'Edit data berhasil');
+			redirect('admin/data_admin');
+		} else {
+			$this->session->set_flashdata('failed', 'Edit data gagal');
+	        redirect('admin/data_admin');
+		}
+	}
+
+	public function del_petugas($id)
+	{
+		if($this->admin_model->del_petugas($id) == TRUE){
+			$this->session->set_flashdata('success', 'Petugas Berhasil Dihapus');
+			redirect('admin/data_admin');
+		} else {
+			$this->session->set_flashdata('failed', 'Siswa Gagal Dihapus');
+			redirect('admin/data_admin');
+		}
+	}
+
 }
 
 /* End of file admin.php */
