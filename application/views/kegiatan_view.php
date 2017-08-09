@@ -1,3 +1,11 @@
+<style>
+  .text-overflow{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+</style>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -59,7 +67,7 @@
 
                         <h3 class="timeline-header"><a href="#">'.$data->NAMA_SISWA.'</a> '.$data->ASAL_SMK.'</h3>
 
-                        <div class="timeline-body">
+                        <div class="timeline-body text-overflow">
                           '.$data->ISI_KEGSIS.'
                         </div>
                         <div class="timeline-footer">

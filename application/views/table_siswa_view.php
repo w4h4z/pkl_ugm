@@ -19,11 +19,14 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data Siswa PKL</h3>
+              <div class="" style="margin-top: 10px">
+                <a href="#" data-toggle="modal" data-target="#tambahSiswa" class="btn btn-md btn-primary">Tambah Siswa</a>
+              </div>
             
             <?php
                   $failed = $this->session->flashdata('failed');
                     if(!empty($failed)){
-                      echo '<div class="alert alert-danger alert-dismissable">';
+                      echo '<div class="alert alert-danger alert-dismissable" style="margin-top: 10px">';
                       echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
                       echo '<i class="icon fa fa-warning"></i>';
                       echo $failed;
@@ -32,7 +35,7 @@
 
                   $success = $this->session->flashdata('success');
                   if(!empty($success)){
-                      echo '<div class="alert alert-success alert-dismissable">';
+                      echo '<div class="alert alert-success alert-dismissable" style="margin-top: 10px">';
                       echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
                       echo '<i class="icon fa fa-check"></i>';
                       echo $success;
@@ -186,4 +189,118 @@
               <!-- /.modal -->  
     ';}
   ?>
+
+               <div class="modal fade" id="tambahSiswa">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Tambah Siswa</h4>
+                    </div>
+                    <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/admin/add_siswa">
+                      <div class="form-group has-feedback">
+                        <label>Username</label>
+                        <input type="text" class="form-control" placeholder="Username" name="username" required>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Password</label>
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>NIS</label>
+                        <input type="number" class="form-control" placeholder="NIS" name="nis" required>
+                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Nama Lengkap</label>
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" required>
+                        <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+                      </div>
+                      <div class="form-group">
+                      <label>Jenis Kelamin</label>
+                      <select class="form-control" name="jenkel">
+                          <option value="Laki-Laki">Laki-Laki</option>
+                          <option value="Perempuan">Perempuan</option>
+                      </select>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Tempat Lahir</label>
+                        <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempatlahir" required>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Tanggal Lahir</label>
+                        <input type="date" class="form-control" name="tgl_lhr" required>
+                        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Agama</label>
+                        <input type="text" class="form-control" placeholder="Agama" name="agama" required>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Alamat Siswa</label>
+                        <textarea class="form-control" rows="3" placeholder="Alamat Siswa" name="alamatsiswa" required></textarea>
+                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>No HP</label>
+                        <input type="number" class="form-control" placeholder="No HP" name="nohp" required>
+                        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Asal SMK</label>
+                        <input type="text" class="form-control" placeholder="Asal SMK" name="asal" required>
+                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Jurusan</label>
+                        <input type="text" class="form-control" placeholder="Jurusan" name="jurusan" required>
+                        <span class="glyphicon glyphicon-education form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>No Telp Sekolah</label>
+                        <input type="number" class="form-control" placeholder="No HP" name="notelp" required>
+                        <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Alamat Sekolah</label>
+                        <textarea class="form-control" rows="3" placeholder="Alamat Sekolah" name="alamatsekolah" required></textarea>
+                        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Tanggal Mulai</label>
+                        <input type="date" class="form-control" name="tgl_mulai" required>
+                        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Tanggal Selesai</label>
+                        <input type="date" class="form-control" name="tgl_selesai" required>
+                        <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <label>Upload Identitas</label>
+                        <input type="file" class="form-control" name="identitas" required>
+                        <span class="glyphicon glyphicon-picture form-control-feedback"></span>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                      <input type="submit" class="btn btn-primary pull-right" value="Submit">
+                    </div>
+                    </form>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
 

@@ -159,22 +159,6 @@
               <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTOIDENTITAS_SISWA; ?>" class="profile-user-img img-responsive img-circle" alt="User profile picture">
 
               <h3 class="profile-username text-center"><?php echo $profil->NAMA_SISWA; ?></h3>
-
-              <!-- <p class="text-muted text-center">Software Engineer</p> -->
-
-              <!-- <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>Followers</b> <a class="pull-right">1,322</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Following</b> <a class="pull-right">543</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Friends</b> <a class="pull-right">13,287</a>
-                </li>
-              </ul>
-
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
               <hr>
               <strong><i class="fa fa-book margin-r-5"></i> Pendidikan</strong>
               <p class="text-muted">
@@ -222,7 +206,6 @@
                       echo $success;
                       echo '</div>';
                   }
-                ?>
 
               foreach ($kegiatan as $data) {
                 echo '

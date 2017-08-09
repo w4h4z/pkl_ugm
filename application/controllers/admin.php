@@ -17,6 +17,7 @@ class Admin extends CI_Controller {
 		$data['total'] = $this->admin_model->total_records();
 		$data['total_v'] = $this->admin_model->total_verified();
 		$data['total_u'] = $this->admin_model->total_unverified();
+		$data['total_p'] = $this->admin_model->total_petugas();		
 		$data['main_view'] = 'dashboard_view';
 		$this->load->view('template', $data);
 	}
@@ -29,6 +30,7 @@ class Admin extends CI_Controller {
 				$data['total'] = $this->admin_model->total_records();
 				$data['total_v'] = $this->admin_model->total_verified();
 				$data['total_u'] = $this->admin_model->total_unverified();
+				$data['total_p'] = $this->admin_model->total_petugas();
 				$data['main_view'] = 'dashboard_view';
 				$this->load->view('template', $data);
 			} else {
@@ -86,6 +88,27 @@ class Admin extends CI_Controller {
 		$this->load->view('template', $data);
 	}
 
+	public function add_siswa()
+	{	
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['max_size']  = '2000';
+		$this->load->library('upload', $config);
+
+            if($this->upload->do_upload('identitas')){
+				if($this->admin_model->add_siswa($this->upload->data()) == TRUE){
+					$this->session->set_flashdata('success', 'Pendaftaran Berhasil');
+		            redirect('admin/data_siswa');
+				} else {
+					$this->session->set_flashdata('failed', 'Pendaftaran Gagal');
+		            redirect('admin/data_siswa');
+				}
+			} else {
+				$this->session->set_flashdata('failed', $this->upload->display_errors());
+		        redirect('admin/data_siswa');
+			}
+	}
+
 	public function edit_siswa($id)
 	{
 		$data['siswa'] = $this->admin_model->get_detail_siswa($id);
@@ -106,12 +129,32 @@ class Admin extends CI_Controller {
 
 	public function edit_siswa_submit($id)
 	{
-		if($this->admin_model->edit_siswa($id) == TRUE){
-			$this->session->set_flashdata('success', 'Edit data berhasil');
-			redirect('auth/data_siswa');
+		if(!isset($_FILES['identitas']) || $_FILES['identitas']['error'] == UPLOAD_ERR_NO_FILE) {
+		    if($this->admin_model->edit_siswa($id) == TRUE){
+				$this->session->set_flashdata('success', 'Edit data berhasil');
+				redirect('admin/data_siswa');
+			} else {
+				$this->session->set_flashdata('failed', 'Edit data gagal');
+			    redirect('admin/data_siswa');
+			}
 		} else {
-			$this->session->set_flashdata('failed', 'Edit data gagal');
-            redirect('auth/data_siswa');
+		    $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']  = '2000';
+			$this->load->library('upload', $config);
+
+			if($this->upload->do_upload('identitas')){
+				if($this->admin_model->edit_siswa($id, $this->upload->data()) == TRUE){
+					$this->session->set_flashdata('success', 'Edit data berhasil');
+					redirect('admin/data_siswa');
+				} else {
+					$this->session->set_flashdata('failed', 'Edit data gagal');
+		            redirect('admin/data_siswa');
+				}
+			} else {
+				$this->session->set_flashdata('failed', $this->upload->display_errors());
+		        redirect('admin/data_siswa');
+			}
 		}
 	}
 
@@ -152,12 +195,32 @@ class Admin extends CI_Controller {
 
 	public function edit_petugas_submit($id)
 	{
-		if($this->admin_model->edit_petugas($id) == TRUE){
-			$this->session->set_flashdata('success', 'Edit data berhasil');
-			redirect('admin/data_admin');
+		if(!isset($_FILES['identitas']) || $_FILES['identitas']['error'] == UPLOAD_ERR_NO_FILE) {
+			if($this->admin_model->edit_petugas($id) == TRUE){
+				$this->session->set_flashdata('success', 'Edit data berhasil');
+				redirect('admin/data_admin');
+			} else {
+				$this->session->set_flashdata('failed', 'Edit data gagal');
+			    redirect('admin/data_admin');
+			}
 		} else {
-			$this->session->set_flashdata('failed', 'Edit data gagal');
-	        redirect('admin/data_admin');
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size']  = '2000';
+			$this->load->library('upload', $config);
+
+	        if($this->upload->do_upload('identitas')){
+				if($this->admin_model->edit_petugas_upload($id, $this->upload->data()) == TRUE){
+					$this->session->set_flashdata('success', 'Edit data berhasil');
+					redirect('admin/data_admin');
+				} else {
+					$this->session->set_flashdata('failed', 'Edit data gagal');
+			        redirect('admin/data_admin');
+				}
+			} else {
+				$this->session->set_flashdata('failed', $this->upload->display_errors());
+		        redirect('admin/data_admin');
+			}   
 		}
 	}
 

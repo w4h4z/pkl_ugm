@@ -63,6 +63,11 @@ class Admin_model extends CI_Model {
 		return $this->db->from('tb_akun')->where('STATUS', $status)->count_all_results();
 	}
 
+	public function total_petugas()
+	{
+		return $this->db->from('tb_akun_admin')->count_all_results();
+	}
+
 	public function verified($id)
 	{
 		$data = array('STATUS' => 'verified');
@@ -78,8 +83,10 @@ class Admin_model extends CI_Model {
 
 	public function unverified($id)
 	{
-		$this->db->where('SISWA_ID',$id)
+		$this->db->where('SISWA_ID', $id)
 				 ->delete('tb_akun');
+		$this->db->where('SISWA_ID', $id)
+				 ->delete('tb_siswa');
 
 		if($this->db->affected_rows() > 0){
 			return TRUE;
@@ -111,6 +118,51 @@ class Admin_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function add_siswa($identitas)
+	{
+		$data1 = array('USERNAME' 		=> $this->input->post('username'),
+					   'PASSWORD' 		=> $this->input->post('password'),
+					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
+					   'ROLE'			=> 'Siswa',
+					   'STATUS'			=> 'verified'
+						);
+
+		$this->db->insert('tb_akun', $data1);
+		$id_akun = $this->db->insert_id();
+
+		$data = array('SISWA_ID' 			=> NULL,
+					  'ACCOUNT_ID'			=> $id_akun,
+					  'NIS'					=> $this->input->post('nis'),
+					  'NAMA_SISWA'			=> $this->input->post('nama'),
+					  'JENKEL_SISWA'		=> $this->input->post('jenkel'),
+					  'TEMPATLAHIR_SISWA '  => $this->input->post('tempatlahir'), 
+					  'TANGGALLAHIR_SISWA'	=> $this->input->post('tgl_lhr'),
+					  'AGAMA_SISWA'			=> $this->input->post('agama'),
+					  'ALAMAT_SISWA'		=> $this->input->post('alamatsiswa'),
+					  'NOHP_SISWA'			=> $this->input->post('nohp'),
+					  'ASAL_SMK'			=> $this->input->post('asal'),
+					  'JURUSAN'				=> $this->input->post('jurusan'),
+					  'NOTELP_SMK'			=> $this->input->post('notelp'),
+					  'ALAMAT_SMK'			=> $this->input->post('alamatsekolah'),
+					  'TGL_MULAI'			=> $this->input->post('tgl_mulai'),
+					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai'),
+					  'FOTODIRI_SISWA'		=> NULL,
+					  'FOTOIDENTITAS_SISWA'	=> $identitas['file_name']
+					  );
+	
+		$this->db->insert('tb_siswa', $data);
+		$id_siswa = $this->db->insert_id();
+
+		$data2 = array('SISWA_ID' => $id_siswa);
+		$this->db->where('ACCOUNT_ID', $id_akun)->update('tb_akun', $data2);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 	public function edit_siswa($id)
 	{
 		$data1 = array('USERNAME' 		=> $this->input->post('username'),
@@ -133,7 +185,7 @@ class Admin_model extends CI_Model {
 					  'NOTELP_SMK'			=> $this->input->post('notelp'),
 					  'ALAMAT_SMK'			=> $this->input->post('alamatsekolah'),
 					  'TGL_MULAI'			=> $this->input->post('tgl_mulai'),
-					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai'),
+					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai')
 					  );
 	
 		$this->db->where('SISWA_ID', $id)->update('tb_siswa', $data);
@@ -144,6 +196,42 @@ class Admin_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function edit_siswa_upload($id, $identitas)
+	{
+		$data1 = array('USERNAME' 		=> $this->input->post('username'),
+					   'PASSWORD' 		=> $this->input->post('password'),
+					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
+						);
+
+		$this->db->where('SISWA_ID', $id)->update('tb_akun', $data1);
+
+		$data = array('NIS'					=> $this->input->post('nis'),
+					  'NAMA_SISWA'			=> $this->input->post('nama'),
+					  'JENKEL_SISWA'		=> $this->input->post('jenkel'),
+					  'TEMPATLAHIR_SISWA '  => $this->input->post('tempatlahir'), 
+					  'TANGGALLAHIR_SISWA'	=> $this->input->post('tgl_lhr'),
+					  'AGAMA_SISWA'			=> $this->input->post('agama'),
+					  'ALAMAT_SISWA'		=> $this->input->post('alamatsiswa'),
+					  'NOHP_SISWA'			=> $this->input->post('nohp'),
+					  'ASAL_SMK'			=> $this->input->post('asal'),
+					  'JURUSAN'				=> $this->input->post('jurusan'),
+					  'NOTELP_SMK'			=> $this->input->post('notelp'),
+					  'ALAMAT_SMK'			=> $this->input->post('alamatsekolah'),
+					  'TGL_MULAI'			=> $this->input->post('tgl_mulai'),
+					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai'),
+					  'FOTOIDENTITAS_SISWA'	=> $identitas['file_name']
+					  );
+	
+		$this->db->where('SISWA_ID', $id)->update('tb_siswa', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 
 	public function tambah_petugas($identitas)
 	{
@@ -202,6 +290,32 @@ class Admin_model extends CI_Model {
 					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
 					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
 					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat')
+					  );
+	
+		$this->db->where('PEMBIMBING_ID', $id)->update('tb_pembimbing', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function edit_petugas_upload($id, $identitas)
+	{
+		$data1 = array('USERNAME' 		=> $this->input->post('username'),
+					   'PASSWORD' 		=> $this->input->post('password'),
+					   'ACCOUNT_EMAIL'	=> $this->input->post('email')
+						);
+
+		$this->db->where('PEMBIMBING_ID', $id)->update('tb_akun_admin', $data1);
+
+		$data = array('NIP'							=> $this->input->post('nip'),
+					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
+					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
+					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
+					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat'),
+					  'FOTOIDENTITAS_PEMBIMBING'	=> $identitas['file_name']
 					  );
 	
 		$this->db->where('PEMBIMBING_ID', $id)->update('tb_pembimbing', $data);

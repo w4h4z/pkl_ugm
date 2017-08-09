@@ -49,14 +49,14 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php echo $total_p; ?></h3>
 
-              <p>Admin</p>
+              <p>Petugas</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>index.php/admin/data_admin" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -118,13 +118,14 @@
                 ?>
                   <ul class="users-list clearfix">
                   <?php
+                    $i = 0;
                     foreach ($siswa as $data) {
                       if($data->STATUS == 'unverified'){
                         echo '
                         <li>
                           <img src="'.base_url().'assets/images/blank.png" style="max-width: 80px" alt="User Image">
                           <a class="users-list-name" href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">'.$data->NAMA_SISWA.'</a>
-                          <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-sm btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger" style="margin-left: 1px">x</a>
+                          <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-xs btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-xs btn-danger" style="margin-left: 1px">Deny</a>
                         </li>
                       ';}
                     }
@@ -267,7 +268,7 @@
                             <li>
                               <img src="'.base_url().'assets/images/blank.png" style="max-width: 80px" alt="User Image">
                               <a class="users-list-name" href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">'.$data->NAMA_SISWA.'</a>
-                              <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-sm btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger" style="margin-left: 1px">x</a>
+                              <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-xs btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-xs btn-danger" style="margin-left: 1px">Deny</a>
                             </li>
                           ';}
                         }

@@ -17,7 +17,6 @@ class Auth_model extends CI_Model {
 
 		$data = array('SISWA_ID' 			=> NULL,
 					  'ACCOUNT_ID'			=> $id_akun,
-					  'PEMBIMBING_ID' 		=> NULL,
 					  'NIS'					=> $this->input->post('nis'),
 					  'NAMA_SISWA'			=> $this->input->post('nama'),
 					  'JENKEL_SISWA'		=> $this->input->post('jenkel'),

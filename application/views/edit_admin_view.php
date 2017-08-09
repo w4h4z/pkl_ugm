@@ -61,7 +61,7 @@
                         <img src="'.base_url().'uploads/'.$petugas->FOTOIDENTITAS_PEMBIMBING.'" class="user-image form-control" alt="User Image" style="height: inherit">
                       </div>
                       <div class="form-group">
-                        <input type="file" class="form-control" name="identitas" required>
+                        <input type="file" class="form-control" name="identitas">
                       </div>
 
   ';
