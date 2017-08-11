@@ -64,104 +64,104 @@
         }
     ?>
 
-    <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/auth/daftar">
+    <form method="post" enctype="multipart/form-data" id="register-form" action="<?php echo base_url();?>index.php/auth/daftar">
       <div class="form-group has-feedback">
         <label>Username</label>
-        <input type="text" class="form-control" placeholder="Username" name="username" required>
+        <input type="text" class="form-control" placeholder="Username" name="username" id="usernmae" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="Password" name="password" required>
+        <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Email</label>
-        <input type="email" class="form-control" placeholder="Email" name="email" required>
+        <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>NIS</label>
-        <input type="number" class="form-control" placeholder="NIS" name="nis" required>
+        <input type="number" class="form-control" placeholder="NIS" name="nis" id="nis" required>
         <span class="glyphicon glyphicon-ok form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Nama Lengkap</label>
-        <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" required>
+        <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" id="nama" required>
         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
       </div>
       <div class="form-group">
       <label>Jenis Kelamin</label>
-      <select class="form-control" name="jenkel">
+      <select class="form-control" name="jenkel" id="jenkel">
           <option value="Laki-Laki">Laki-Laki</option>
           <option value="Perempuan">Perempuan</option>
       </select>
       </div>
       <div class="form-group has-feedback">
         <label>Tempat Lahir</label>
-        <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempatlahir" required>
+        <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempatlahir" id="tempatlahir" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Lahir</label>
-        <input type="date" class="form-control" name="tgl_lhr" required>
+        <input type="date" class="form-control" name="tgl_lhr" id="tgl_lhr" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Agama</label>
-        <input type="text" class="form-control" placeholder="Agama" name="agama" required>
+        <input type="text" class="form-control" placeholder="Agama" name="agama" id="agama" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Alamat Siswa</label>
-        <textarea class="form-control" rows="3" placeholder="Alamat Siswa" name="alamatsiswa" required></textarea>
+        <textarea class="form-control" rows="3" placeholder="Alamat Siswa" name="alamatsiswa" id="alamatsiswa" required></textarea>
         <span class="glyphicon glyphicon-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>No HP</label>
-        <input type="number" class="form-control" placeholder="No HP" name="nohp" required>
+        <input type="number" class="form-control" placeholder="No HP" name="nohp" id="nohp" required>
         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Asal SMK</label>
-        <input type="text" class="form-control" placeholder="Asal SMK" name="asal" required>
+        <input type="text" class="form-control" placeholder="Asal SMK" name="asal" id="asal" required>
         <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Jurusan</label>
-        <input type="text" class="form-control" placeholder="Jurusan" name="jurusan" required>
+        <input type="text" class="form-control" placeholder="Jurusan" name="jurusan" id="jurusan" required>
         <span class="glyphicon glyphicon-education form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>No Telp Sekolah</label>
-        <input type="number" class="form-control" placeholder="No HP" name="notelp" required>
+        <input type="number" class="form-control" placeholder="No HP" name="notelp" id="notelp" required>
         <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Alamat Sekolah</label>
-        <textarea class="form-control" rows="3" placeholder="Alamat Sekolah" name="alamatsekolah" required></textarea>
+        <textarea class="form-control" rows="3" placeholder="Alamat Sekolah" name="alamatsekolah" id="alamatsekolah" required></textarea>
         <span class="glyphicon glyphicon-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Mulai</label>
-        <input type="date" class="form-control" name="tgl_mulai" required>
+        <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Selesai</label>
-        <input type="date" class="form-control" name="tgl_selesai" required>
+        <input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Upload Identitas</label>
-        <input type="file" class="form-control" name="identitas" required>
+        <input type="file" class="form-control" name="identitas" id="identitas" required>
         <span class="glyphicon glyphicon-picture form-control-feedback"></span>
       </div>
       <div class="form-group">
         <label>Captcha</label>
-        <p id="captImg"><?php echo $captchaImg; ?></p>
+        <p id="captImg" class="captcha-img"><?php echo $captchaImg; ?></p>
         <input type="text" class="form-control" name="captcha" placeholder="Captcha" style="margin-bottom: 5px"/>
-        <a href="<?php echo base_url(); ?>index.php/auth/refresh" class="refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
+        <a href="#" class="reload-captcha refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
       </div>
       <div class="row">
         <!-- /.col -->
@@ -210,79 +210,203 @@
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/dist/js/demo.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    })
-    //Initialize Select2 Elements
-    $('.select2').select2()
+<!-- validate -->
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery/lib/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/jquery/dist/jquery.validate.js"></script>
 
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
+<script type="text/javascript">
+  $( document ).ready( function () {
+      var base_url = '<?php echo base_url(); ?>';
+         $('.reload-captcha').click(function(event){
+             event.preventDefault();
+             $.ajax({
+                 url:base_url+'index.php/auth/refresh_login',
+                 success:function(data){
+                     $('.captcha-img').replaceWith(data);
+                 }
+             });            
+          });
 
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      $( "#register-form" ).validate( {
+        rules: {
+          username: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                } 
+            },
+            minlength: 4
+          },
+          password: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 6
+          },
+          nis: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 4
+          },
+          nama: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 6
+          },
+          tempatlahir: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 4
+          },
+          agama: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 5
+          },
+          alamatsiswa: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 10 
+          },
+          nohp:{
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 9
+          },
+          asal:{
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 10
+          },
+          jurusan:{
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 5
+          },
+          notelp:{
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 8
+          },
+          alamatsekolah: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
+            minlength: 10 
+          },
         },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
+        messages: {
+          username: {
+            required: "Please enter a username",
+            minlength: "Your username must const of at least 4 characters"
+          },
+          password: {
+            required: "Please provide a password",
+            minlength: "Your password must be at least 6 characters long"
+          },
+          nis: {
+            required: "Please enter your NIS number",
+            minlength: "Your NIS number must const of at least 4 characters"
+          }, 
+          nama: {
+            required : "Please enter your full name",
+            minlength: "Your full name muct const of at leat 6 characters"
+          },
+          tempatlahir: {
+            required : "Please enter your place of birth",
+            minlength: "Your place of birth must const of at least 4 characters"
+          },
+          agama: {
+            required : "Please enter your religion",
+            minlength: "Your religion must const of at least 5 characters"
+          },
+          alamatsiswa: {
+            required : "Please enter your home address",
+            minlength: "Your home addres must const of at least 10 characters"
+          }, 
+          nohp:{
+            required : "Please enter your phone number",
+            minlength: "Your phone number must be at least 9 characters long"
+          }, 
+          asal:{
+            required : "Please enter which school are you from",
+            minlength: "Your school must const of at least 10 characters"
+          },
+          jurusan:{
+            required : "Please enter your department",
+            minlength: "Your department must const of at least 5 characters"
+          },
+          notelp:{
+            required : "Please enter your school phone number",
+            minlength: "Your school phone number must be at least 8 characters long"
+          }, 
+          alamatsekolah: {
+            required : "Please enter your school address",
+            minlength: "Your school addres must const of at least 10 characters"
+          }, 
+        },
+        errorElement: "em",
+        errorPlacement: function ( error, element ) {
+          // Add the `help-block` class to the error element
+          error.addClass( "help-block" );
 
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
-    })
-
-    //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass   : 'iradio_minimal-blue'
-    })
-    //Red color scheme for iCheck
-    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-      checkboxClass: 'icheckbox_minimal-red',
-      radioClass   : 'iradio_minimal-red'
-    })
-    //Flat red color scheme for iCheck
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass   : 'iradio_flat-green'
-    })
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    //Timepicker
-    $('.timepicker').timepicker({
-      showInputs: false
-    })
-  })
+          if ( element.prop( "type" ) === "checkbox" ) {
+            error.insertAfter( element.parent( "label" ) );
+          } else {
+            error.insertAfter( element );
+          }
+        },
+        highlight: function ( element, errorClass, validClass ) {
+          $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+        },
+      } );
+    });
 </script>
 </body>
 </html>
