@@ -72,8 +72,14 @@
       </div>
       <div class="form-group has-feedback">
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+        <input type="password" class="form-control" placeholder="Password" name="password" id="password" passwordCheck="passwordCheck" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" id="confirm_password" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span id='confirm_message'></span>
       </div>
       <div class="form-group has-feedback">
         <label>Email</label>
@@ -144,12 +150,12 @@
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Mulai</label>
-        <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" required>
+        <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" min="<?php echo date("Y-m-d");?>" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Selesai</label>
-        <input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" required>
+        <input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" min="<?php echo date("Y-m-d");?>" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -159,7 +165,7 @@
       </div>
       <div class="form-group">
         <label>Captcha</label>
-        <p id="captImg" class="captcha-img"><?php echo $captchaImg; ?></p>
+          <p id="captImg" class="captcha-img"><?php echo $captchaImg; ?></p>
         <input type="text" class="form-control" name="captcha" placeholder="Captcha" style="margin-bottom: 5px"/>
         <a href="#" class="reload-captcha refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
       </div>
@@ -236,12 +242,31 @@
          $('.reload-captcha').click(function(event){
              event.preventDefault();
              $.ajax({
-                 url:base_url+'index.php/auth/refresh_login',
+                 url:base_url+'index.php/auth/refresh_captcha',
                  success:function(data){
-                     $('.captcha-img').replaceWith(data);
+                     $('.captcha-img').replaceWith("<p class='captcha-img'>" + data + "</p>");
                  }
              });            
           });
+
+      jQuery.validator.addMethod("passwordCheck",
+        function(value, element, param) {
+            if (this.optional(element)) {
+                return true;
+            } else if (!/[0-9]/.test(value)) {
+                return false;
+            }
+
+            return true;
+        },
+        "Password must contain number");
+
+        $('#password, #confirm_password').on('keyup', function () {
+          if ($('#password').val() == $('#confirm_password').val()) {
+            $('#confirm_message').html('Matching').css('color', 'green');
+          } else 
+            $('#confirm_message').html('Not Matching').css('color', 'red');
+        });
 
       $( "#register-form" ).validate( {
         rules: {
@@ -263,6 +288,15 @@
                 }
             },
             minlength: 6
+            
+          },
+          confirm_password: {
+            required: {
+                depends:function(){
+                    $(this).val($.trim($(this).val()));
+                    return true;
+                }
+            },
             
           },
           nis: {
@@ -364,6 +398,9 @@
           password: {
             required: "Please provide a password",
             minlength: "Your password must be at least 6 characters long"
+          },
+          confirm_password: {
+            required: "Please provide a confirm password"
           },
           nis: {
             required: "Please enter your NIS number",

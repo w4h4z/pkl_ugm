@@ -24,7 +24,8 @@ class Auth extends CI_Controller {
 	            'img_width'     => '100',
 	            'img_height'    => '30',
 	            'word_length'   => '4',
-	            'font_size'     => '16'
+	            'font_size'     => '32',
+	            'expiration'    => 7200
 	        );
 	        $captcha = create_captcha($config);
 	        
@@ -129,7 +130,8 @@ class Auth extends CI_Controller {
             'img_width'     => '100',
             'img_height'    => '30',
             'word_length'   => '4',
-            'font_size'     => '16'
+            'font_size'     => '16',
+            'expiration'    => 7200
         );
         $captcha = create_captcha($config);
         
@@ -143,7 +145,7 @@ class Auth extends CI_Controller {
 		$this->load->view('register_view', $data);
 	}
 
-	public function refresh(){
+    public function refresh_captcha(){
         // Captcha configuration
         $config = array(
             'img_path'      => 'captcha_images/',
@@ -151,27 +153,8 @@ class Auth extends CI_Controller {
             'img_width'     => '100',
             'img_height'    => '30',
             'word_length'   => '4',
-            'font_size'     => '16'
-        );
-        $captcha = create_captcha($config);
-        
-        // Unset previous captcha and store new captcha word
-        $this->session->unset_userdata('captchaCode');
-        $this->session->set_userdata('captchaCode',$captcha['word']);
-        
-        // Display captcha image
-        echo $captcha['image'];
-    }
-
-    public function refresh_login(){
-        // Captcha configuration
-        $config = array(
-            'img_path'      => 'captcha_images/',
-            'img_url'       => base_url().'captcha_images/',
-            'img_width'     => '100',
-            'img_height'    => '30',
-            'word_length'   => '4',
-            'font_size'     => '16'
+            'font_size'     => '16',
+            'expiration'    => 7200
         );
         $captcha = create_captcha($config);
         
