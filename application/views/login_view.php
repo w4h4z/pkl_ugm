@@ -70,7 +70,11 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group">
-        <p id="captImg" class="captcha-img"><?php echo $captchaImg; ?></p>
+        <p>
+          <p class="captcha-img">
+            <?php echo $captchaImg; ?>
+          </p>
+        </p>
         <input type="text" class="form-control" name="captcha" placeholder="Captcha" style="margin-bottom: 5px"/>
         <a href="#" class="reload-captcha refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
       </div>
@@ -117,7 +121,7 @@
              $.ajax({
                  url:base_url+'index.php/auth/refresh_login',
                  success:function(data){
-                     $('.captcha-img').replaceWith(data);
+                     $('.captcha-img').replaceWith("<p class='captcha-img'>" + data + "</p>");
                  }
              });            
           });
