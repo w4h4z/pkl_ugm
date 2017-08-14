@@ -38,6 +38,20 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	public function checkusername($username)
+	{
+        $user = $this->auth_model->get_user($username);
+        
+        if($user == null)
+        {
+            echo "notexists";
+        }
+        else
+        {
+            echo "exists";
+        }  
+	}
+
 	public function home()
 	{
 		$this->load->view('home_view');

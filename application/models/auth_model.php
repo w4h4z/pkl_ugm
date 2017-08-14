@@ -75,5 +75,17 @@ class Auth_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function get_user($username)
+	{
+		$query = $this->db->where('USERNAME',$username)
+						  ->get('tb_akun');
+
+		if($query->num_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
 }
 	

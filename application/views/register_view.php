@@ -216,6 +216,22 @@
 
 <script type="text/javascript">
   $( document ).ready( function () {
+    $.validator.addMethod("checkUsername", 
+        function(value, element) {
+            var result = false;
+            $.ajax({
+                type:"GET",
+                async: false,
+                url: base_url+'index.php/auth/checkusername/' + value,
+                success: function(msg) {
+                    result = (msg == "exists") ? false : true;
+                }
+            });
+            return result;
+        }, 
+        "Username Already Exists"
+    );
+
       var base_url = '<?php echo base_url(); ?>';
          $('.reload-captcha').click(function(event){
              event.preventDefault();
@@ -236,7 +252,8 @@
                     return true;
                 } 
             },
-            minlength: 4
+            minlength: 4,
+            checkUsername: true
           },
           password: {
             required: {
@@ -246,6 +263,7 @@
                 }
             },
             minlength: 6
+            
           },
           nis: {
             required: {
