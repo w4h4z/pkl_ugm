@@ -48,7 +48,7 @@
 <div class="col-xs-8 col-xs-offset-2 bg-col">
 <div class="register-box mar-top" style="width: 60%;">
   <div class="register-logo mar-bot">
-    <img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" class="logo-ugm"><br><b class="header">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
+    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" class="logo-ugm"></a><br><b class="header">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
   </div>
   <div class="register-box-body">
     <p class="login-box-msg">Create an account</p>
@@ -67,33 +67,33 @@
     <form method="post" enctype="multipart/form-data" id="register-form" action="<?php echo base_url();?>index.php/auth/daftar">
       <div class="form-group has-feedback">
         <label>Username</label>
-        <input type="text" class="form-control" placeholder="Username" name="username" id="usernmae" required>
+        <input type="text" class="form-control" placeholder="Username" name="username" id="usernmae" value="<?php echo $this->session->flashdata('username_error'); ?>" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="Password" name="password" id="password" passwordCheck="passwordCheck" required>
+        <input type="password" class="form-control" placeholder="Password" name="password" id="password" value="<?php echo $this->session->flashdata('password_error'); ?>" passwordCheck="passwordCheck" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Confirm Password</label>
-        <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" id="confirm_password" required>
+        <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" id="confirm_password" value="<?php echo $this->session->flashdata('confirm_password_error'); ?>" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         <span id='confirm_message'></span>
       </div>
       <div class="form-group has-feedback">
         <label>Email</label>
-        <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+        <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<?php echo $this->session->flashdata('email_error'); ?>" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>NIS</label>
-        <input type="number" class="form-control" placeholder="NIS" name="nis" id="nis" required>
+        <input type="number" class="form-control" placeholder="NIS" name="nis" id="nis" value="<?php echo $this->session->flashdata('nis_error'); ?>" required>
         <span class="glyphicon glyphicon-ok form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Nama Lengkap</label>
-        <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" id="nama" required>
+        <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama" id="nama" value="<?php echo $this->session->flashdata('nama_error'); ?>" required>
         <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
       </div>
       <div class="form-group">
@@ -105,57 +105,57 @@
       </div>
       <div class="form-group has-feedback">
         <label>Tempat Lahir</label>
-        <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempatlahir" id="tempatlahir" required>
+        <input type="text" class="form-control" placeholder="Tempat Lahir" name="tempatlahir" id="tempatlahir" value="<?php echo $this->session->flashdata('tempatlahir_error'); ?>" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Lahir</label>
-        <input type="date" class="form-control" name="tgl_lhr" id="tgl_lhr" required>
+        <input type="date" class="form-control" name="tgl_lhr" id="tgl_lhr" value="<?php echo $this->session->flashdata('tgl_lhr_error'); ?>" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Agama</label>
-        <input type="text" class="form-control" placeholder="Agama" name="agama" id="agama" required>
+        <input type="text" class="form-control" placeholder="Agama" name="agama" id="agama" value="<?php echo $this->session->flashdata('agama_error'); ?>" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Alamat Siswa</label>
-        <textarea class="form-control" rows="3" placeholder="Alamat Siswa" name="alamatsiswa" id="alamatsiswa" required></textarea>
+        <textarea class="form-control" rows="3" placeholder="Alamat Siswa" name="alamatsiswa" id="alamatsiswa" required><?php echo $this->session->flashdata('alamatsiswa_error'); ?></textarea>
         <span class="glyphicon glyphicon-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>No HP</label>
-        <input type="number" class="form-control" placeholder="No HP" name="nohp" id="nohp" required>
+        <input type="number" class="form-control" placeholder="No HP" name="nohp" id="nohp" value="<?php echo $this->session->flashdata('nohp_error'); ?>" required>
         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Asal SMK</label>
-        <input type="text" class="form-control" placeholder="Asal SMK" name="asal" id="asal" required>
+        <input type="text" class="form-control" placeholder="Asal SMK" name="asal" id="asal" value="<?php echo $this->session->flashdata('asal_error'); ?>" required>
         <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Jurusan</label>
-        <input type="text" class="form-control" placeholder="Jurusan" name="jurusan" id="jurusan" required>
+        <input type="text" class="form-control" placeholder="Jurusan" name="jurusan" id="jurusan" value="<?php echo $this->session->flashdata('jurusan_error'); ?>" required>
         <span class="glyphicon glyphicon-education form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>No Telp Sekolah</label>
-        <input type="number" class="form-control" placeholder="No HP" name="notelp" id="notelp" required>
+        <input type="number" class="form-control" placeholder="No HP" name="notelp" id="notelp" value="<?php echo $this->session->flashdata('notelp_error'); ?>" required>
         <span class="glyphicon glyphicon-phone-alt form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Alamat Sekolah</label>
-        <textarea class="form-control" rows="3" placeholder="Alamat Sekolah" name="alamatsekolah" id="alamatsekolah" required></textarea>
+        <textarea class="form-control" rows="3" placeholder="Alamat Sekolah" name="alamatsekolah" id="alamatsekolah" required><?php echo $this->session->flashdata('alamatsekolah_error'); ?></textarea>
         <span class="glyphicon glyphicon-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Mulai</label>
-        <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" min="<?php echo date("Y-m-d");?>" required>
+        <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" value="<?php echo $this->session->flashdata('tgl_mulai_error'); ?>" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Tanggal Selesai</label>
-        <input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" min="<?php echo date("Y-m-d");?>" required>
+        <input type="date" class="form-control" name="tgl_selesai" id="tgl_selesai" min="<?php echo date("Y-m-d");?>" value="<?php echo $this->session->flashdata('tgl_selesai_error'); ?>" required>
         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -255,11 +255,13 @@
                 return true;
             } else if (!/[0-9]/.test(value)) {
                 return false;
+            } else if(!/[a-z]/.test(value)){
+                return false;
             }
 
             return true;
         },
-        "Password must contain number");
+        "Password must contain number & alphabet");
 
         $('#password, #confirm_password').on('keyup', function () {
           if ($('#password').val() == $('#confirm_password').val()) {
@@ -309,39 +311,19 @@
             minlength: 4
           },
           nama: {
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 6
           },
           tempatlahir: {
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 4
           },
           agama: {
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 5
           },
           alamatsiswa: {
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 10 
           },
           nohp:{
@@ -354,21 +336,11 @@
             minlength: 9
           },
           asal:{
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 10
           },
           jurusan:{
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 5
           },
           notelp:{
@@ -381,13 +353,11 @@
             minlength: 8
           },
           alamatsekolah: {
-            required: {
-                depends:function(){
-                    $(this).val($.trim($(this).val()));
-                    return true;
-                }
-            },
+            required: true,
             minlength: 10 
+          },
+          captcha: {
+            required: true 
           },
         },
         messages: {
@@ -441,7 +411,10 @@
           alamatsekolah: {
             required : "Please enter your school address",
             minlength: "Your school addres must const of at least 10 characters"
-          }, 
+          },
+          captcha: {
+            required : "Please enter captcha"
+          },  
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {

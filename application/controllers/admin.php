@@ -120,10 +120,10 @@ class Admin extends CI_Controller {
 	{
 		if($this->admin_model->del_siswa($id) == TRUE){
 			$this->session->set_flashdata('success', 'Siswa Berhasil Dihapus');
-			redirect('auth/data_siswa');
+			redirect('admin/data_siswa');
 		} else {
 			$this->session->set_flashdata('failed', 'Siswa Gagal Dihapus');
-			redirect('auth/data_siswa');
+			redirect('admin/data_siswa');
 		}
 	}
 

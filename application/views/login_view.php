@@ -62,11 +62,11 @@
 
     <form action="<?php echo base_url(); ?>index.php/auth/login/" id="login-form" enctype="multipart/form-data" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" id="username" name="username" required>
+        <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="<?php echo $this->session->flashdata('username_error'); ?>" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+        <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="<?php echo $this->session->flashdata('password_error'); ?>" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group">
@@ -93,8 +93,6 @@
       <a href="<?php echo base_url(); ?>index.php/auth/register" class="btn btn-block btn-social btn-google btn-flat center">Don't have an account register here</a>
     </div>
     <!-- /.social-auth-links -->
-
-    <!-- <a href="#">I forgot my password</a><br> -->
 
   </div>
   <!-- /.login-box-body -->
@@ -128,21 +126,23 @@
         rules: {
           username: {
             required: true,
-            minlength: 4
           },
           password: {
             required: true,
-            minlength: 6
+          },
+          captcha: {
+            required: true,
           },
         },
         messages: {
           username: {
-            required: "Please enter a username",
-            minlength: "Your username must consist of at least 4 characters"
+            required: "Please enter a username"
           },
           password: {
-            required: "Please provide a password",
-            minlength: "Your password must be at least 6 characters long"
+            required: "Please provide a password"
+          },
+          captcha: {
+            required: "Please enter a captcha"
           },
         },
         errorElement: "em",

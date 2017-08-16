@@ -82,6 +82,24 @@ class Auth extends CI_Controller {
 		        redirect('auth/register');
 			}
         }else{
+        	$this->session->set_flashdata('username_error', $this->input->post('username'));
+        	$this->session->set_flashdata('password_error', $this->input->post('password'));
+        	$this->session->set_flashdata('confirm_password_error', $this->input->post('confirm_password'));
+        	$this->session->set_flashdata('email_error', $this->input->post('email'));
+        	$this->session->set_flashdata('nis_error', $this->input->post('nis'));
+        	$this->session->set_flashdata('nama_error', $this->input->post('nama'));
+        	$this->session->set_flashdata('tempatlahir_error', $this->input->post('tempatlahir'));
+        	$this->session->set_flashdata('tgl_lhr_error', $this->input->post('tgl_lhr'));
+        	$this->session->set_flashdata('agama_error', $this->input->post('agama'));
+        	$this->session->set_flashdata('alamatsiswa_error', $this->input->post('alamatsiswa'));
+        	$this->session->set_flashdata('nohp_error', $this->input->post('nohp'));
+        	$this->session->set_flashdata('asal_error', $this->input->post('asal'));
+        	$this->session->set_flashdata('jurusan_error', $this->input->post('jurusan'));
+        	$this->session->set_flashdata('notelp_error', $this->input->post('notelp'));
+        	$this->session->set_flashdata('alamatsekolah_error', $this->input->post('alamatsekolah'));
+        	$this->session->set_flashdata('tgl_mulai_error', $this->input->post('tgl_mulai'));
+        	$this->session->set_flashdata('tgl_selesai_error', $this->input->post('tgl_selesai'));
+
             $this->session->set_flashdata('failed', 'Captcha code was not match, please try again');
 		    redirect('auth/register');
         }
@@ -108,9 +126,26 @@ class Auth extends CI_Controller {
 	            redirect('auth');
 			}
         } else {
+        	$this->session->set_flashdata('username_error', $this->input->post('username'));
+        	$this->session->set_flashdata('password_error', $this->input->post('password'));
+
         	$this->session->set_flashdata('failed', 'Captcha code was not match, please try again');
-	           redirect('auth');
+	        redirect('auth');
         }
+	}
+
+	public function Ajax_Captcha($code)
+	{
+      $sessCaptcha = $this->session->userdata('captchaCode');
+
+	  if ($code == strtoupper($sessCaptcha))
+	  {
+	       return true;
+	  }
+	  else
+	  {
+	      return false;
+	  }
 	}
 
 	public function logout()
