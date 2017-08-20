@@ -45,10 +45,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page" style="background-image: url(<?php echo base_url(); ?>assets/images/login_bg.jpeg);background-attachment: fixed;background-position: center;background-size:100%">
-<div class="col-xs-8 col-xs-offset-2 bg-col">
-<div class="register-box mar-top" style="width: 60%;">
-  <div class="register-logo mar-bot">
-    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" class="logo-ugm"></a><br><b class="header">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
+<div class="register-box" style="width: 60%;margin-top: 25px;">
+  <div class="register-logo" style="margin-bottom: 13px;">
+    <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" style="max-width: 75pt;"></a><br><b class="header">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
   </div>
   <div class="register-box-body">
     <p class="login-box-msg">Create an account</p>
@@ -178,7 +177,7 @@
       </div>
     </form>
 
-      <div class="already">
+      <div style="text-align: center;padding-top: 10px;">
           Already have an account?<a href="<?php echo base_url(); ?>"><u> Log in</u></a>
       </div>
 
@@ -186,7 +185,6 @@
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
-</div>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->

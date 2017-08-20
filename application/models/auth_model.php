@@ -76,6 +76,33 @@ class Auth_model extends CI_Model {
 		}
 	}
 
+	public function login_admin()
+	{
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+
+		$query = $this->db->where('USERNAME',$username)
+						  ->where('PASSWORD',$password)
+						  ->get('tb_akun_admin');
+
+		if($query->num_rows() > 0){
+			
+			$pembimbing = array_shift($query->result_array());
+
+			$data = array('USERNAME' 		=> $username, 
+						  'logged_in' 		=> TRUE, 
+						  'PEMBIMBING_ID' 	=> $pembimbing['PEMBIMBING_ID'], 
+						  'ROLE' 			=> $pembimbing['ROLE'],
+						);
+
+			$this->session->set_userdata($data);
+
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 	public function get_user($username)
 	{
 		$query = $this->db->where('USERNAME',$username)

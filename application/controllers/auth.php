@@ -35,8 +35,61 @@ class Auth extends CI_Controller {
 	        
 	        // Send captcha image to view
 	        $data['captchaImg'] = $captcha['image'];
-			$this->load->view('login_view', $data);
+			$this->load->view('home_view', $data);
 		}
+	}
+
+	public function login_admin()
+	{
+		$this->load->view('login_admin_view');
+	}
+
+	public function login_siswa()
+	{
+		$config = array(
+	            'img_path'      => 'captcha_images/',
+	            'img_url'       => base_url().'captcha_images/',
+	            'img_width'     => '100',
+	            'img_height'    => '30',
+	            'word_length'   => '4',
+	            'font_size'     => '32',
+	            'expiration'    => 7200
+	        );
+	        $captcha = create_captcha($config);
+	        
+	        // Unset previous captcha and store new captcha word
+	        $this->session->unset_userdata('captchaCode');
+	        $this->session->set_userdata('captchaCode',$captcha['word']);
+	        
+	        // Send captcha image to view
+	        $data['captchaImg'] = $captcha['image'];
+
+	    $data['main_view'] = 'login_siswa_view';
+		$this->load->view('template_siswa', $data);
+	}
+
+	public function register_siswa()
+	{
+		$config = array(
+	            'img_path'      => 'captcha_images/',
+	            'img_url'       => base_url().'captcha_images/',
+	            'img_width'     => '100',
+	            'img_height'    => '30',
+	            'word_length'   => '4',
+	            'font_size'     => '32',
+	            'expiration'    => 7200
+	        );
+	        $captcha = create_captcha($config);
+	        
+	        // Unset previous captcha and store new captcha word
+	        $this->session->unset_userdata('captchaCode');
+	        $this->session->set_userdata('captchaCode',$captcha['word']);
+	        
+	        // Send captcha image to view
+	        $data['captchaImg'] = $captcha['image'];
+
+	    $data['main_view'] = 'register_siswa_view';
+		$this->load->view('template_siswa', $data);
 	}
 
 	public function checkusername($username)
@@ -72,14 +125,14 @@ class Auth extends CI_Controller {
             if($this->upload->do_upload('identitas')){
 				if($this->auth_model->simpan($this->upload->data()) == TRUE){
 					$this->session->set_flashdata('success', 'Pendaftaran Berhasil, Silahkan Log In');
-		            redirect('auth');
+		            redirect('auth/login_siswa');
 				} else {
 					$this->session->set_flashdata('failed', 'Pendaftaran Gagal');
-		            redirect('auth/register');
+		            redirect('auth/register_siswa');
 				}
 			} else {
 				$this->session->set_flashdata('failed', $this->upload->display_errors());
-		        redirect('auth/register');
+		        redirect('auth/register_siswa');
 			}
         }else{
         	$this->session->set_flashdata('username_error', $this->input->post('username'));
@@ -105,6 +158,26 @@ class Auth extends CI_Controller {
         }
 	}
 
+	public function login_admin_submit()
+	{
+		if($this->auth_model->login_admin() == TRUE){
+			redirect('admin/dashboard');
+		} else {
+			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
+			redirect('auth/login_admin');
+		}
+	}
+
+	public function login_siswa_submit()
+	{
+		if($this->auth_model->login() == TRUE){
+			redirect('siswa/profile');
+		} else {
+			$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
+			redirect('auth/login_siswa');
+		}
+	}
+
 	public function login()
 	{
 		$inputCaptcha = $this->input->post('captcha');
@@ -112,25 +185,21 @@ class Auth extends CI_Controller {
 
         if($inputCaptcha === $sessCaptcha){
 			if($this->auth_model->login() == TRUE){
-				if($this->session->userdata('ROLE') == 'Admin'){
-					redirect('admin/dashboard');
-				} else {
 					if($this->session->userdata('STATUS') == 'verified'){
 						redirect('siswa/profile');
 					} else {
 						redirect('auth/verifikasi');
 					}
-				}
 			} else {
 				$this->session->set_flashdata('failed', 'Login Gagal, Username/Password Salah');
-	            redirect('auth');
+	            redirect('auth/login_siswa');
 			}
         } else {
         	$this->session->set_flashdata('username_error', $this->input->post('username'));
         	$this->session->set_flashdata('password_error', $this->input->post('password'));
 
         	$this->session->set_flashdata('failed', 'Captcha code was not match, please try again');
-	        redirect('auth');
+	        redirect('auth/login_siswa');
         }
 	}
 
@@ -205,7 +274,8 @@ class Auth extends CI_Controller {
 	{
 		$id = $this->session->userdata('SISWA_ID');
 		$data['profil'] = $this->siswa_model->profil($id);
-		$this->load->view('verifikasi_view', $data);
+		$data['main_view'] = 'verifikasi_siswa_view';
+		$this->load->view('template_siswa', $data);
 	}
 
 }

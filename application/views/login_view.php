@@ -31,10 +31,11 @@
 
 </head>
 <body class="hold-transition login-page" style="background-image: url(<?php echo base_url(); ?>assets/images/login_bg.jpeg);background-attachment: fixed;background-position: center;background-size:100%">
-<div class="col-xs-8 col-xs-offset-2 bg-col">
-<div class="login-box mar-top">
-  <div class="login-logo mar-bot">
-    <img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" class="logo-ugm"><br><b class="header">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
+<div class="row">
+<div class="">
+<div class="login-box" style="margin-top: 25px;">
+  <div class="login-logo" style="margin-bottom: 13px;">
+    <img src="<?php echo base_url(); ?>assets/images/logo_ugm.png" style="max-width: 75pt;"><br><b style="font-size: 28px">Sistem Informasi PKL DSSDI</b><br> Universitas Gadjah Mada
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -98,6 +99,7 @@
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
+</div>
 </div>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/jquery/dist/jquery.min.js"></script>

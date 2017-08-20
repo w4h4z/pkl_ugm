@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Home</title>
+  <title>PKL UGM | Home</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -20,6 +20,8 @@
 
   <!-- <link href="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet"/> -->
 
+    <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/plugins/iCheck/square/blue.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +35,7 @@
 
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-purple layout-top-nav">
+<body class="hold-transition skin-blue layout-top-nav">
 <div class="wrapper">
   <header class="main-header">
     <nav class="navbar navbar-static-top">
@@ -70,8 +72,8 @@
 	          <div class="box-body">
 	           <div class="row">
 	            <h3 style="text-align: center; font-weight: 600; margin-bottom: 20px">Login as</h3>
-	            <a href="#" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-info" style="margin-bottom: 18px; letter-spacing: 3px; font-weight: 500">ADMIN</a><br>
-	            <a href="#" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-info" style="margin-bottom: 18px; letter-spacing: 3px;font-weight: 500">SISWA</a>
+	            <a href="<?php echo base_url(); ?>index.php/auth/login_admin" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-info" style="margin-bottom: 18px; letter-spacing: 3px; font-weight: 500">ADMIN</a><br>
+	            <a href="<?php echo base_url(); ?>index.php/auth/login_siswa" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-info" style="margin-bottom: 18px; letter-spacing: 3px;font-weight: 500">SISWA</a>
 	           </div>
 	          </div>
 	          <!-- /.box-body -->
