@@ -144,7 +144,7 @@ class Admin extends CI_Controller {
 			$this->load->library('upload', $config);
 
 			if($this->upload->do_upload('identitas')){
-				if($this->admin_model->edit_siswa($id, $this->upload->data()) == TRUE){
+				if($this->admin_model->edit_siswa_upload($id, $this->upload->data()) == TRUE){
 					$this->session->set_flashdata('success', 'Edit data berhasil');
 					redirect('admin/data_siswa');
 				} else {

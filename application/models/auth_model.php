@@ -58,8 +58,9 @@ class Auth_model extends CI_Model {
 						  ->get('tb_akun');
 
 		if($query->num_rows() > 0){
-			
-			$siswa = array_shift($query->result_array());
+			$result = $query->result_array();
+
+			$siswa = array_shift($result);
 
 			$data = array('USERNAME' 	=> $username, 
 						  'logged_in' 	=> TRUE, 
@@ -86,8 +87,9 @@ class Auth_model extends CI_Model {
 						  ->get('tb_akun_admin');
 
 		if($query->num_rows() > 0){
-			
-			$pembimbing = array_shift($query->result_array());
+			$result = $query->result_array();
+
+			$pembimbing = array_shift($result);
 
 			$data = array('USERNAME' 		=> $username, 
 						  'logged_in' 		=> TRUE, 
