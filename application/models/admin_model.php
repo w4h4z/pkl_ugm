@@ -13,6 +13,11 @@ class Admin_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function get_pembimbing($id)
+	{
+		return $this->db->where('PEMBIMBING_ID', $id)->get('tb_pembimbing')->row();
+	}
+
 	public function get_detail_siswa($id)
 	{
 		$this->db->where('tb_siswa.SISWA_ID', $id);

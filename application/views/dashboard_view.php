@@ -51,7 +51,7 @@
             <div class="inner">
               <h3><?php echo $total_p; ?></h3>
 
-              <p>Petugas</p>
+              <p>Admin</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>

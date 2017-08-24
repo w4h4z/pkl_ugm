@@ -62,7 +62,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo base_url(); ?>assets/images/blank.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Admin</span>
+              <span class="hidden-xs"><?php echo $petugas->NAMA_PEMBIMBING;?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -70,24 +70,9 @@
                 <img src="<?php echo base_url(); ?>assets/images/blank.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Admin
+                  <?php echo $petugas->NAMA_PEMBIMBING;?>
                   <small>DSSDI - UGM</small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -115,7 +100,7 @@
           <img src="<?php echo base_url(); ?>assets/images/blank.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p><?php echo $petugas->NAMA_PEMBIMBING;?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -137,7 +122,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url(); ?>index.php/admin/data_siswa"><i class="fa fa-circle-o"></i> Siswa <i class="fa fa-user pull-right"></i></a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/admin/data_admin"><i class="fa fa-circle-o"></i> Petugas <i class="fa fa-key pull-right"></i></a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/admin/data_admin"><i class="fa fa-circle-o"></i> Operator <i class="fa fa-key pull-right"></i></a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/admin/data_operator"><i class="fa fa-circle-o"></i> Admin <i class="fa fa-key pull-right"></i></a></li>
           </ul>
           <li>
             <a href="<?php echo base_url('index.php/admin/data_kegiatan'); ?>">
@@ -146,7 +132,7 @@
           </li>
         </li>
         <li class="header">DOCUMENTATION</li>
-        <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>User Manual</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Galery</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>About Us</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Thanks To</span></a></li>
@@ -164,7 +150,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Anak PKL</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a href="https://dssdi.ugm.ac.id">DSSDI UGM</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -192,38 +178,7 @@
 <!-- page script -->
 <script>
   $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-
-    // AREA CHART
-    var area = new Morris.Area({
-      element: 'revenue-chart',
-      resize: true,
-      data: [
-        {y: '2011 Q1', item1: 2666, item2: 2666},
-        {y: '2011 Q2', item1: 2778, item2: 2294},
-        {y: '2011 Q3', item1: 4912, item2: 1969},
-        {y: '2011 Q4', item1: 3767, item2: 3597},
-        {y: '2012 Q1', item1: 6810, item2: 1914},
-        {y: '2012 Q2', item1: 5670, item2: 4293},
-        {y: '2012 Q3', item1: 4820, item2: 3795},
-        {y: '2012 Q4', item1: 15073, item2: 5967},
-        {y: '2013 Q1', item1: 10687, item2: 4460},
-        {y: '2013 Q2', item1: 8432, item2: 5713}
-      ],
-      xkey: 'y',
-      ykeys: ['item1', 'item2'],
-      labels: ['Item 1', 'Item 2'],
-      lineColors: ['#a0d0e0', '#3c8dbc'],
-      hideHover: 'auto'
-    });
+    
   })
 </script>
 </body>

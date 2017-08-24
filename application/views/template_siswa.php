@@ -78,7 +78,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Anak PKL</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a href="https://dssdi.ugm.ac.id">DSSDI UGM</a>.</strong> All rights
     reserved.
     </div>
   </footer>

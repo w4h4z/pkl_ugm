@@ -98,7 +98,8 @@
     
 </div>
 <div class="panel-footer">
-    <strong>Copyright &copy; 2017 <a href="#">DSSDI</a>.</strong> Sistem Informasi PKL 
+    <strong>Copyright &copy; 2017 <a href="https://dssdi.ugm.ac.id">DSSDI UGM</a>.</strong> All rights
+    reserved. 
 </div>
 </div>
 </div>

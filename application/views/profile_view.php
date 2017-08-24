@@ -66,21 +66,6 @@
                   <small><?php echo $profil->ASAL_SMK; ?></small>
                 </p>
               </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
@@ -127,8 +112,8 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li class="header">About</li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>About Us</span></a></li>
+        <li class="header">Manual</li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>User Manual</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -154,7 +139,7 @@
         <div class="col-md-3">
 
           <!-- Profile Image -->
-          <div class="box box-primary">
+          <div class="box box-primary container">
             <div class="box-body box-profile">
               <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTOIDENTITAS_SISWA; ?>" class="profile-user-img img-responsive img-circle" alt="User profile picture">
 
@@ -212,7 +197,7 @@
                   <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img src="'.base_url().'assets/images/blank.png" class="img-circle img-bordered-sm" alt="User Image">
+                    <img src="'.base_url().'uploads/'.$data->FOTOIDENTITAS_SISWA.'" class="img-circle img-bordered-sm" alt="User Image">
                         <span class="username">
                           <a href="#">'.$data->NAMA_SISWA.'</a>
                           <a href="'.base_url().'index.php/siswa/del_kegiatan/'.$data->ID_KEGSIS.'" class="pull-right btn-box-tool"><i class="fa fa-trash"></i></a>
@@ -266,11 +251,11 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+<footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="https://adminlte.io">Anak PKL</a>.</strong> All rights
+    <strong>Copyright &copy; 2017 <a href="https://dssdi.ugm.ac.id">DSSDI UGM</a>.</strong> All rights
     reserved.
   </footer>
 </div>
