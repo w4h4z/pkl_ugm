@@ -323,7 +323,7 @@ class Admin_model extends CI_Model {
 					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
 					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
 					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat'),
-					  'FOTOIDENTITAS_PEMBIMBING'	=> 'blank.png',
+					  'FOTODIRI_PEMBIMBING'			=> 'blank.png',
 					  'FOTOIDENTITAS_PEMBIMBING'	=> $identitas['file_name']
 					  );
 	
