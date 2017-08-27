@@ -220,7 +220,7 @@ class Admin_model extends CI_Model {
 					  'ALAMAT_SMK'			=> $this->input->post('alamatsekolah'),
 					  'TGL_MULAI'			=> $this->input->post('tgl_mulai'),
 					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai'),
-					  'FOTODIRI_SISWA'		=> NULL,
+					  'FOTODIRI_SISWA'		=> 'blank.png',
 					  'FOTOIDENTITAS_SISWA'	=> $identitas['file_name']
 					  );
 	
@@ -323,6 +323,7 @@ class Admin_model extends CI_Model {
 					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
 					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
 					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat'),
+					  'FOTOIDENTITAS_PEMBIMBING'	=> 'blank.png',
 					  'FOTOIDENTITAS_PEMBIMBING'	=> $identitas['file_name']
 					  );
 	
@@ -356,6 +357,7 @@ class Admin_model extends CI_Model {
 					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
 					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
 					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat'),
+					  'FOTODIRI_PEMBIMBING'			=> 'blank.png',
 					  'FOTOIDENTITAS_PEMBIMBING'	=> $identitas['file_name']
 					  );
 	
