@@ -281,7 +281,7 @@
                       <h4 class="modal-title">Edit Profil</h4>
                     </div>
                     <div class="modal-body">
-                      <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/siswa/edit_submit">
+                      <form method="post" id="edit" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/siswa/edit_submit">
                   <?php
                       echo '
                       <div class="form-group">
@@ -290,7 +290,11 @@
                       </div>
                       <div class="form-group">
                         <label>Password</label>
-                        <input type="text" class="form-control" name="password" value="'.$profil->PASSWORD.'">
+                        <input type="password" class="form-control" id="pwd" name="password" value="'.$profil->PASSWORD.'">
+                      </div>
+                      <div class="form-group">
+                        <input type="checkbox" id="show-hide" name="show-hide" value=""/>
+                        <label for="show-hide">Show password</label>
                       </div>
                       <div class="form-group">
                         <label>Email</label>
@@ -423,7 +427,40 @@
 ?>  
 
 
-
+<script>
+(function() {
+  
+  var PasswordToggler = function( element, field ) {
+    this.element = element;
+    this.field = field;
+    
+    this.toggle();  
+  };
+  
+  PasswordToggler.prototype = {
+    toggle: function() {
+      var self = this;
+      self.element.addEventListener( "change", function() {
+        if( self.element.checked ) {
+          self.field.setAttribute( "type", "text" );
+        } else {
+          self.field.setAttribute( "type", "password" );  
+        }
+            }, false);
+    }
+  };
+  
+  document.addEventListener( "DOMContentLoaded", function() {
+    var checkbox = document.querySelector( "#show-hide" ),
+      pwd = document.querySelector( "#pwd" ),
+      form = document.querySelector( "#edit" );
+      
+      var toggler = new PasswordToggler( checkbox, pwd );
+    
+  });
+  
+})();
+</script>
 
 
 
