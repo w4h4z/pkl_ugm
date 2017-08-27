@@ -5,7 +5,12 @@ class Siswa_model extends CI_Model {
 
 	public function profil($id)
 	{
-		return $this->db->where('SISWA_ID', $id)->get('tb_siswa')->row();
+		$this->db->select('*');
+		$this->db->where('tb_akun.SISWA_ID', $id);
+		$this->db->from('tb_siswa');
+		$this->db->join('tb_akun', 'tb_akun.SISWA_ID = tb_siswa.SISWA_ID');
+
+		return $this->db->get()->row();
 	}
 
 	public function kegiatan($id)
@@ -33,7 +38,6 @@ class Siswa_model extends CI_Model {
 		$this->db->order_by('tb_kegiatansiswa.ID_KEGSIS', 'DESC');
 
 		return $this->db->get()->result();
-		//return $this->db->where('SISWA_ID', $id)->get('tb_kegiatansiswa')->result();
 	}
 
 	public function del_kegiatan($id)
@@ -41,6 +45,21 @@ class Siswa_model extends CI_Model {
 		$this->db->where('ID_KEGSIS', $id)->delete('tb_kegiatansiswa');
 
 		if($this->db->affected_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function update_foto($foto)
+	{
+		$id = $this->session->userdata('SISWA_ID');
+
+		$data = array('FOTODIRI_SISWA' => $foto['file_name'] );
+
+		$this->db->where('SISWA_ID', $id)->update('tb_siswa', $data);
+
+		if ($this->db->affected_rows() > 0) {
 			return TRUE;
 		} else {
 			return FALSE;

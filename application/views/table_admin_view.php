@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Petugas PKL 
+        Data Admin PKL 
         <small>DSSDI UGM</small>
       </h1>
       <ol class="breadcrumb">
@@ -18,9 +18,9 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">   
-              <h3 class="box-title">Data Petugas PKL</h3>
+              <h3 class="box-title">Data Admin PKL</h3>
               <div class="" style="margin-top: 10px">
-                <a href="#" data-toggle="modal" data-target="#tambahAdmin" class="btn btn-md btn-primary">Tambah Petugas</a>
+                <a href="#" data-toggle="modal" data-target="#tambahAdmin" class="btn btn-md btn-primary">Tambah Admin</a>
               </div>
             
             <?php
@@ -57,6 +57,11 @@
                   <th>No Hp</th>
                   <th>Email</th>
                   <th>Alamat</th>
+                  <?php 
+                    if($total_a > 1){
+                      echo '<th>Role</th>';
+                    }
+                  ?>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -75,7 +80,16 @@
                     <td>'.$data->NOHP_PEMBIMBING.'</td>
                     <td>'.$data->ACCOUNT_EMAIL.'</td>
                     <td>'.$data->ALAMAT_PEMBIMBING.'</td>
-                    <td><a href="'.base_url().'index.php/admin/edit_petugas/'.$data->PEMBIMBING_ID.'" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="'.base_url().'index.php/admin/del_petugas/'.$data->PEMBIMBING_ID.'" class="btn btn-sm btn-danger">Delete</a></td>
+                    '; if($total_a > 1){
+                      echo '<td><a href="#" data-toggle="modal" data-target="#role'.$data->PEMBIMBING_ID.'" class="btn btn-warning btn-sm">Role</a></td>';
+                    } echo '
+                    <td><a href="'.base_url().'index.php/admin/edit_admin/'.$data->PEMBIMBING_ID.'" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a>
+                    ';
+                    if($total_a > 1){
+                      echo '
+                    <a href="'.base_url().'index.php/admin/del_admin/'.$data->PEMBIMBING_ID.'" class="btn btn-sm btn-danger">Delete</a>  
+                    ';} echo'
+                    </td>
                   </tr>
 
                 ';}
@@ -101,7 +115,7 @@
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Tambah Petugas</h4>
+                      <h4 class="modal-title">Tambah Admin</h4>
                     </div>
                     <div class="modal-body">
                     <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/admin/add_admin">
@@ -156,3 +170,40 @@
                 <!-- /.modal-dialog -->
               </div>
               <!-- /.modal -->
+
+
+              <?php
+                foreach ($admin as $data) {
+                  echo '
+              <div class="modal fade" id="role'.$data->PEMBIMBING_ID.'">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Role</h4>
+                    </div>
+                    <div class="modal-body">
+                    <label class="control-label">Ganti Role</label>
+                    <form method="post" enctype="multipart/form-data" action="'.base_url().'index.php/admin/role_admin/'.$data->PEMBIMBING_ID.'">
+                      <select class="form-control" name="role" id="role">
+                        <option value="Admin">Admin</option>
+                        <option value="Operator">Operator</option>
+                      </select>
+                      <h4 class="text-red" style="font-weight: 600">Peringatan !</h4>
+                      <p>Mengganti Role akan mengurangi/menambah beberapa fitur yang hanya bisa diakses oleh Role tertentu. Pastikan anda sudah membaca User Manual dan mengerti akan tindakan anda.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                      <input type="submit" class="btn btn-primary pull-right" value="Submit">
+                      </form>
+                    </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              </div>
+              ';
+                }
+              ?>

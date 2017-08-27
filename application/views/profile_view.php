@@ -27,6 +27,16 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <style>
+  .text-overflow {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  </style>
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <div class="wrapper">
@@ -60,7 +70,7 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTOIDENTITAS_SISWA; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="img-circle" alt="User Image">
                 <p>
                   <?php echo $profil->NAMA_SISWA; ?>
                   <small><?php echo $profil->ASAL_SMK; ?></small>
@@ -68,6 +78,9 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
+                <div class="pull-left">
+                <a href="#" data-toggle="modal" data-target="#edit" class="btn btn-info btn-flat">Edit Profil</a>
+                </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url(); ?>index.php/auth/logout" class="btn btn-danger btn-flat">Sign out</a>
                 </div>
@@ -86,25 +99,13 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTOIDENTITAS_SISWA; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $profil->NAMA_SISWA; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
-      <!-- <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form> -->
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
@@ -113,7 +114,7 @@
           </a>
         </li>
         <li class="header">Manual</li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>User Manual</span></a></li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>User Manual</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -141,9 +142,16 @@
           <!-- Profile Image -->
           <div class="box box-primary container">
             <div class="box-body box-profile">
-              <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTOIDENTITAS_SISWA; ?>" class="profile-user-img img-responsive img-circle" alt="User profile picture">
+              <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="profile-user-img img-responsive img-circle" alt="User profile picture">
 
               <h3 class="profile-username text-center"><?php echo $profil->NAMA_SISWA; ?></h3>
+              <div class="form-group">
+              <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/siswa/foto_profil">
+                <label>Ganti Foto</label>
+                <input type="file" class="form-control" name="foto">
+                <input type="submit" class="btn btn-sm btn-info" value="Submit" style="margin-top: 4px">
+              </form>
+              </div>
               <hr>
               <strong><i class="fa fa-book margin-r-5"></i> Pendidikan</strong>
               <p class="text-muted">
@@ -197,7 +205,7 @@
                   <!-- Post -->
                 <div class="post">
                   <div class="user-block">
-                    <img src="'.base_url().'uploads/'.$data->FOTOIDENTITAS_SISWA.'" class="img-circle img-bordered-sm" alt="User Image">
+                    <img src="'.base_url().'uploads/'.$data->FOTODIRI_SISWA.'" class="img-circle img-bordered-sm" alt="User Image">
                         <span class="username">
                           <a href="#">'.$data->NAMA_SISWA.'</a>
                           <a href="'.base_url().'index.php/siswa/del_kegiatan/'.$data->ID_KEGSIS.'" class="pull-right btn-box-tool"><i class="fa fa-trash"></i></a>
@@ -205,9 +213,10 @@
                     <span class="description">'.$data->TGL_KEGSIS.'</span>
                   </div>
                   <!-- /.user-block -->
-                  <p>
+                  <p class="text-overflow">
                     '.$data->ISI_KEGSIS.'
                   </p>
+                  <a href="#" data-toggle="modal" data-target="#readmore'.$data->ID_KEGSIS.'" class="btn btn-sm btn-info">Read More</a>
                 </div>
                 <!-- /.post -->
               ';}
@@ -260,6 +269,163 @@
   </footer>
 </div>
 <!-- ./wrapper -->
+
+
+
+              <div class="modal fade" id="edit">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Edit Profil</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/siswa/edit_submit">
+                  <?php
+                      echo '
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" value="'.$profil->USERNAME.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="password" value="'.$profil->PASSWORD.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" value="'.$profil->ACCOUNT_EMAIL.'">
+                      </div>
+                      <div class="form-group">
+                        <label>NIS</label>
+                        <input type="text" class="form-control" name="nis" value="'.$profil->NIS.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="nama" value="'.$profil->NAMA_SISWA.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <input type="text" class="form-control" name="jenkel" value="'.$profil->JENKEL_SISWA.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Tempat Lahir</label>
+                        <input type="text" class="form-control" name="tempatlahir" value="'.$profil->TEMPATLAHIR_SISWA.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Tanggal Lahir</label>
+                        <input type="text" class="form-control" name="tgl_lhr" value="'.$profil->TANGGALLAHIR_SISWA.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Agama</label>
+                        <input type="text" class="form-control" name="agama" value="'.$profil->AGAMA_SISWA.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Alamat Siswa</label>
+                        <textarea class="form-control" name="alamatsiswa">'.$profil->ALAMAT_SISWA.'</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Nomor HP</label>
+                        <input type="text" class="form-control" name="nohp" value="'.$profil->NOHP_SISWA.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Asal SMK</label>
+                        <input type="text" class="form-control" name="asal" value="'.$profil->ASAL_SMK.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Jurusan</label>
+                        <input type="text" class="form-control" name="jurusan" value="'.$profil->JURUSAN.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Nomor Telp Sekolah</label>
+                        <input type="text" class="form-control" name="notelp" value="'.$profil->NOTELP_SMK.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Alamat SMK</label>
+                        <textarea class="form-control" name="alamatsekolah">'.$profil->ALAMAT_SMK.'</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Tanggal Mulai</label>
+                        <input type="text" class="form-control" name="tgl_mulai" value="'.$profil->TGL_MULAI.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Tanggal Selesai</label>
+                        <input type="text" class="form-control" name="tgl_selesai" value="'.$profil->TGL_SELESAI.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Identitas</label>
+                        <img src="'.base_url().'uploads/'.$profil->FOTOIDENTITAS_SISWA.'" class="user-image form-control" alt="User Image" style="height: inherit">
+                      </div>
+                      <div class="form-group">
+                        <input type="file" class="form-control" name="identitas">
+                      </div>
+                      ';
+                    ?>
+ 
+                    </div>
+                    <div class="modal-footer">
+                      <input type="submit" class="btn btn-primary pull-right" value="Submit">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+
+
+
+
+
+<?php
+  foreach ($kegiatan as $data) {
+    echo '
+  
+              <div class="modal fade" id="readmore'.$data->ID_KEGSIS.'">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Aktivitas Siswa</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box box-solid">
+                          <div class="box-header with-border">
+                            <i class="fa fa-user"></i>
+
+                            <b><h2 class="box-title">'.$data->NAMA_SISWA.'</h2></b><small> - '.$data->ASAL_SMK.'</small>
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body">
+                            <blockquote>
+                              <p>'.$data->ISI_KEGSIS.'</p>
+                              <small>Created date <cite title="Source Title">'.$data->TGL_KEGSIS.'</cite></small>
+                            </blockquote>
+                          </div>
+                          <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->  
+
+  ';}
+?>  
+
+
+
+
+
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/jquery/dist/jquery.min.js"></script>

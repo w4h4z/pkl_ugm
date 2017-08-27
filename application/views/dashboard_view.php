@@ -34,56 +34,44 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px"></sup></h3>
+              <h3><?php echo $total_o; ?><sup style="font-size: 20px"></sup></h3>
 
               <p>Operator</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url(); ?>index.php/admin/data_operator" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-4 col-xs-7">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><?php echo $total_p; ?></h3>
 
-              <p>Admin</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="<?php echo base_url(); ?>index.php/admin/data_admin" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
+        <?php
+              if($this->session->userdata('ROLE') == 'Admin'){
+                echo '
+                  <div class="col-lg-4 col-xs-7">
+                  <!-- small box -->
+                  <div class="small-box bg-yellow">
+                    <div class="inner">
+                      <h3>'.$total_a.'</h3>
+
+                      <p>Admin</p>
+                    </div>
+                    <div class="icon">
+                      <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="'.base_url().'index.php/admin/data_admin" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+                <!-- ./col -->
+                ';
+              }
+            ?>
+        
       </div>
       <!-- /.row -->
       <!-- Main row -->
       <div class="row">
-        <!-- Left col -->
-<!--         <section class="col-lg-7 connectedSortable">
-          
-          <div class="nav-tabs-custom">
-            
-            <ul class="nav nav-tabs pull-right">
-              <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-              <li class="pull-left header"><i class="fa fa-inbox"></i> Grafik Siswa PKL</li>
-            </ul>
-            <div class="tab-content no-padding">
-              
-              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-            </div>
-          </div>
-          
-
-        </section> -->
-        <!-- right col -->
-
         <div class="col-lg-5">
               <!-- USERS LIST -->
               <div class="box box-danger">
@@ -118,14 +106,14 @@
                 ?>
                   <ul class="users-list clearfix">
                   <?php
-                    $i = 0;
-                    foreach ($siswa as $data) {
+                    foreach ($siswa1 as $data) {
                       if($data->STATUS == 'unverified'){
                         echo '
                         <li>
-                          <img src="'.base_url().'assets/images/blank.png" style="max-width: 80px" alt="User Image">
+                          <a href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">
+                          <img src="'.base_url().'assets/images/blank.png" style="" alt="User Image">
                           <a class="users-list-name" href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">'.$data->NAMA_SISWA.'</a>
-                          <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-xs btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-xs btn-danger" style="margin-left: 1px">Deny</a>
+                          <a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#accept'.$data->SISWA_ID.'">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-xs btn-danger" style="margin-left: 1px">Deny</a>
                         </li>
                       ';}
                     }
@@ -154,7 +142,7 @@
   </div>
 
   <?php
-    foreach ($siswa as $data) {
+    foreach ($siswa1 as $data) {
       echo '
       <div class="modal fade" id="modal'.$data->SISWA_ID.'">
                 <div class="modal-dialog">
@@ -262,13 +250,13 @@
                     <div class="modal-body">
                       <ul class="users-list clearfix">
                       <?php
-                        foreach ($siswa as $data) {
+                        foreach ($siswa1 as $data) {
                           if($data->STATUS == 'unverified'){
                             echo '
                             <li>
                               <img src="'.base_url().'assets/images/blank.png" style="max-width: 80px" alt="User Image">
                               <a class="users-list-name" href="#" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'">'.$data->NAMA_SISWA.'</a>
-                              <a href="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'" class="btn btn-xs btn-primary">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-xs btn-danger" style="margin-left: 1px">Deny</a>
+                              <a href="#" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#accept'.$data->SISWA_ID.'">Accept</a><a href="'.base_url().'index.php/admin/unverified/'.$data->SISWA_ID.'" class="btn btn-xs btn-danger" style="margin-left: 1px">Deny</a>
                             </li>
                           ';}
                         }
@@ -285,3 +273,40 @@
                 <!-- /.modal-dialog -->
               </div>
               <!-- /.modal -->  
+
+              <?php 
+              foreach ($siswa1 as $data) {
+              echo '
+              <div class="modal fade" id="accept'.$data->SISWA_ID.'">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Accept box</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                        <label class="control-label">Silahkan pilih pembimbing terlebih dahulu untuk siswa PKL</label>
+                        <form method="post" enctype="multipart/form-data" action="'.base_url().'index.php/admin/verified/'.$data->SISWA_ID.'">
+                        <select class="form-control" name="pembimbing" id="pembimbing">
+                          '; 
+                          foreach($pembimbing as $data1){
+                            echo '
+                            <option value="'.$data1->PEMBIMBING_ID.'">'.$data1->NAMA_PEMBIMBING.'</option>
+                          ';} echo '
+                        </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                      <input type="submit" class="btn btn-md btn-info pull-right" value="Submit"/>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->  
+              ';}?>

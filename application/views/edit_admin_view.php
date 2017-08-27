@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Petugas PKL
+        Data Admin PKL
         <small>DSSDI UGM</small>
       </h1>
       <ol class="breadcrumb">
@@ -18,10 +18,10 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Edit Data Petugas PKL</h3>
+              <h3 class="box-title">Edit Data Admin PKL</h3>
             </div>
             <div class="box-body">  
-            <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/admin/edit_petugas_submit/<?php echo $petugas->PEMBIMBING_ID; ?>">
+            <form method="post" enctype="multipart/form-data" action="<?php echo base_url();?>index.php/admin/edit_admin_submit/<?php echo $petugas->PEMBIMBING_ID; ?>">
 <?php
     echo '
                       <div class="form-group">

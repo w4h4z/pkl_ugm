@@ -31,7 +31,7 @@ class Auth_model extends CI_Model {
 					  'ALAMAT_SMK'			=> $this->input->post('alamatsekolah'),
 					  'TGL_MULAI'			=> $this->input->post('tgl_mulai'),
 					  'TGL_SELESAI'			=> $this->input->post('tgl_selesai'),
-					  'FOTODIRI_SISWA'		=> NULL,
+					  'FOTODIRI_SISWA'		=> 'blank.png',
 					  'FOTOIDENTITAS_SISWA'	=> $identitas['file_name']
 					  );
 	
@@ -65,7 +65,7 @@ class Auth_model extends CI_Model {
 			$data = array('USERNAME' 	=> $username, 
 						  'logged_in' 	=> TRUE, 
 						  'SISWA_ID' 	=> $siswa['SISWA_ID'], 
-						  'ROLE' 		=> $siswa['ROLE'],
+						  'ROLE'		=> $siswa['ROLE'],
 						  'STATUS'		=> $siswa['STATUS']
 						);
 
@@ -94,7 +94,7 @@ class Auth_model extends CI_Model {
 			$data = array('USERNAME' 		=> $username, 
 						  'logged_in' 		=> TRUE, 
 						  'PEMBIMBING_ID' 	=> $pembimbing['PEMBIMBING_ID'], 
-						  'ROLE' 			=> $pembimbing['ROLE'],
+						  'ROLE' 			=> $pembimbing['ROLE']
 						);
 
 			$this->session->set_userdata($data);

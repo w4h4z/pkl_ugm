@@ -61,23 +61,24 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url(); ?>assets/images/blank.png" class="user-image" alt="User Image">
+              <img src="<?php echo base_url(); ?>uploads/<?php echo $petugas->FOTODIRI_PEMBIMBING; ?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $petugas->NAMA_PEMBIMBING;?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url(); ?>assets/images/blank.png" class="img-circle" alt="User Image">
-
+                <img src="<?php echo base_url(); ?>uploads/<?php echo $petugas->FOTODIRI_PEMBIMBING; ?>" class="img-circle" alt="User Image">
                 <p>
                   <?php echo $petugas->NAMA_PEMBIMBING;?>
-                  <small>DSSDI - UGM</small>
+                  <small><?php echo $this->session->userdata('ROLE'); ?> DSSDI - UGM</small>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-right">
-                  <a href="<?php echo base_url(); ?>index.php/auth/logout" class="btn btn-danger btn-flat">Sign out</a>
+                <div>
+                  <a href="#" data-toggle="modal" data-target="#edit" class="btn btn-info btn-sm btn-flat">Edit Profil</a>
+                  <a href="#" data-toggle="modal" data-target="#foto" class="btn btn-sm btn-warning btn-flat">Ganti foto profil</a>
+                  <a href="<?php echo base_url(); ?>index.php/auth/logout" class="btn btn-danger btn-sm btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -97,7 +98,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>assets/images/blank.png" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url(); ?>uploads/<?php echo $petugas->FOTODIRI_PEMBIMBING; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $petugas->NAMA_PEMBIMBING;?></p>
@@ -122,8 +123,14 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?php echo base_url(); ?>index.php/admin/data_siswa"><i class="fa fa-circle-o"></i> Siswa <i class="fa fa-user pull-right"></i></a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/admin/data_admin"><i class="fa fa-circle-o"></i> Operator <i class="fa fa-key pull-right"></i></a></li>
-            <li><a href="<?php echo base_url(); ?>index.php/admin/data_operator"><i class="fa fa-circle-o"></i> Admin <i class="fa fa-key pull-right"></i></a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/admin/data_operator"><i class="fa fa-circle-o"></i> Operator <i class="fa fa-lock pull-right"></i></a></li>
+            <?php
+              if($this->session->userdata('ROLE') == 'Admin'){
+                echo '
+                  <li><a href="'.base_url().'index.php/admin/data_admin"><i class="fa fa-circle-o"></i> Admin <i class="fa fa-key pull-right"></i></a></li>
+                ';
+              }
+            ?>
           </ul>
           <li>
             <a href="<?php echo base_url('index.php/admin/data_kegiatan'); ?>">
@@ -133,7 +140,6 @@
         </li>
         <li class="header">DOCUMENTATION</li>
         <li><a href="#"><i class="fa fa-book"></i> <span>User Manual</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Galery</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>About Us</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Thanks To</span></a></li>
       </ul>
@@ -157,6 +163,115 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- Modal -->
+            <div class="modal fade" id="edit">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Edit Profil</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" enctype="multipart/form-data" id="edit" action="<?php echo base_url();?>index.php/admin/edit_profil_operator">
+                  <?php
+                      echo '
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" value="'.$profil->USERNAME.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" id="pwd" value="'.$profil->PASSWORD.'">
+                      </div>
+                      <div class="form-group">
+                        <input type="checkbox" id="show-hide" name="show-hide" value=""/>
+                        <label for="show-hide">Show password</label>
+                      </div>
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" value="'.$profil->ACCOUNT_EMAIL.'">
+                      </div>
+                      <div class="form-group">
+                        <label>NIP</label>
+                        <input type="text" class="form-control" name="nip" value="'.$profil->NIP.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="nama" value="'.$profil->NAMA_PEMBIMBING.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <input type="text" class="form-control" name="jenkel" value="'.$profil->JENKEL_PEMBIMBING.'">
+                      </div>
+                      <div class="form-group">
+                        <label>Alamat</label>
+                        <textarea class="form-control" name="alamat">'.$profil->ALAMAT_PEMBIMBING.'</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label>Nomor HP</label>
+                        <input type="text" class="form-control" name="no_hp" value="'.$profil->NOHP_PEMBIMBING.'">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Identitas</label>
+                        <img src="'.base_url().'uploads/'.$profil->FOTOIDENTITAS_PEMBIMBING.'" class="user-image form-control" alt="User Image" style="height: inherit">
+                      </div>
+                      <div class="form-group">
+                        <input type="file" class="form-control" name="identitas">
+                      </div>
+                      ';
+                    ?>
+                      </div>
+                      <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary pull-right" value="Submit">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+            <div class="modal fade" id="foto">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Edit Foto Profil</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/admin/foto_profil">
+                      <div class="form-group">
+                        <label>Silahkan pilih foto</label>
+                        <input type="file" accept="image/*" onchange="loadFile(event)" name="foto" style="margin-bottom: 19px">
+                        <img id="output" style="max-width: 100%"/>
+                        <script>
+                          var loadFile = function(event) {
+                            var output = document.getElementById('output');
+                            output.src = URL.createObjectURL(event.target.files[0]);
+                          };
+                        </script>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <input type="submit" class="btn btn-primary pull-right" value="Submit">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                      </form>
+                    </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+
+<!-- /.modal -->
+
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -178,8 +293,49 @@
 <!-- page script -->
 <script>
   $(function () {
-    
+     $('#example1').DataTable({
+       'paging'      : true,
+       'lengthChange': true,
+       'searching'   : true,
+       'ordering'    : true,
+       'info'        : true,
+       'autoWidth'   : true
+     })
   })
+</script>
+<script>
+(function() {
+  
+  var PasswordToggler = function( element, field ) {
+    this.element = element;
+    this.field = field;
+    
+    this.toggle();  
+  };
+  
+  PasswordToggler.prototype = {
+    toggle: function() {
+      var self = this;
+      self.element.addEventListener( "change", function() {
+        if( self.element.checked ) {
+          self.field.setAttribute( "type", "text" );
+        } else {
+          self.field.setAttribute( "type", "password" );  
+        }
+            }, false);
+    }
+  };
+  
+  document.addEventListener( "DOMContentLoaded", function() {
+    var checkbox = document.querySelector( "#show-hide" ),
+      pwd = document.querySelector( "#pwd" ),
+      form = document.querySelector( "#edit" );
+      
+      var toggler = new PasswordToggler( checkbox, pwd );
+    
+  });
+  
+})();
 </script>
 </body>
 </html>

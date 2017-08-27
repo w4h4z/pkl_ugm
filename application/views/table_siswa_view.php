@@ -55,6 +55,7 @@
                   <th>NIS</th>
                   <th>Asal Sekolah</th>
                   <th>Jurusan</th>
+                  <th>Pembimbing</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -72,6 +73,7 @@
                     <td>'.$data->NIS.'</td>
                     <td>'.$data->ASAL_SMK.'</td>
                     <td>'.$data->JURUSAN.'</td>
+                    <td>'.$data->NAMA_PEMBIMBING.'</td>
                     <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal'.$data->SISWA_ID.'" style="margin-right: 5px">Detail</button><a href="'.base_url().'index.php/admin/edit_siswa/'.$data->SISWA_ID.'" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a><a href="'.base_url().'index.php/admin/del_siswa/'.$data->SISWA_ID.'" class="btn btn-sm btn-danger">Delete</a></td>
                   </tr>
 
@@ -172,6 +174,10 @@
                       <div class="form-group">
                         <label>Tanggal Selesai</label>
                         <input type="text" class="form-control" name="tgl_selesai" value="'.$data->TGL_SELESAI.'" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label>Pembimbing</label>
+                        <input type="text" class="form-control" name="Pembimbing" value="'.$data->NAMA_PEMBIMBING.'" disabled>
                       </div>
                       <div class="form-group">
                         <label>Identitas</label>

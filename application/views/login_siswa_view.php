@@ -35,7 +35,7 @@
                   }
                 ?>
 
-    <form action="<?php echo base_url(); ?>index.php/auth/login" id="login-form" enctype="multipart/form-data" method="post">
+    <form action="<?php echo base_url(); ?>index.php/auth/login_siswa_submit" id="login-form" enctype="multipart/form-data" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="<?php echo $this->session->flashdata('username_error'); ?>" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -45,11 +45,11 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group">
-          <p class="captcha-img">
+          <p class="captcha-img text-center">
             <?php echo $captchaImg; ?>
           </p>
         <input type="text" class="form-control" name="captcha" placeholder="Captcha" style="margin-bottom: 5px" required />
-        <a href="#" class="reload-captcha refreshCaptcha btn btn-info btn-sm" ><i class="glyphicon glyphicon-refresh"></i></a>
+        <a href="#" class="reload-captcha refreshCaptcha btn btn-info btn-sm tex" ><i class="glyphicon glyphicon-refresh"></i></a>
       </div>
       <div class="row">
         <!-- /.col -->

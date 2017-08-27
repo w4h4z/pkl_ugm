@@ -8,7 +8,28 @@ class Admin_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('tb_siswa');
 		$this->db->join('tb_akun', 'tb_akun.SISWA_ID = tb_siswa.SISWA_ID');
+		$this->db->join('tb_detail', 'tb_detail.SISWA_ID = tb_siswa.SISWA_ID');
+		$this->db->join('tb_pembimbing', 'tb_pembimbing.PEMBIMBING_ID = tb_detail.PEMBIMBING_ID');
 		$this->db->order_by('tb_siswa.SISWA_ID', 'ASC');
+
+		return $this->db->get()->result();
+	}
+
+	public function get_siswa()
+	{
+		$this->db->select('*');
+		$this->db->from('tb_siswa');
+		$this->db->join('tb_akun', 'tb_akun.SISWA_ID = tb_siswa.SISWA_ID');
+		$this->db->order_by('tb_siswa.SISWA_ID', 'ASC');
+
+		return $this->db->get()->result();
+	}
+
+	public function get_all_pembimbing()
+	{
+		$this->db->select('*');
+		$this->db->from('tb_pembimbing');
+		$this->db->order_by('tb_pembimbing.NAMA_PEMBIMBING', 'ASC');
 
 		return $this->db->get()->result();
 	}
@@ -28,9 +49,10 @@ class Admin_model extends CI_Model {
 		return $this->db->get()->row();
 	}
 
-	public function get_data_admin()
+	public function get_data_operator()
 	{
-		$this->db->select('*');
+		$role = 'Operator';
+		$this->db->where('ROLE', $role);
 		$this->db->from('tb_pembimbing');
 		$this->db->join('tb_akun_admin', 'tb_akun_admin.PEMBIMBING_ID = tb_pembimbing.PEMBIMBING_ID');
 		$this->db->order_by('tb_pembimbing.PEMBIMBING_ID', 'ASC');
@@ -38,12 +60,33 @@ class Admin_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
-	public function get_detail_admin($id)
+	public function get_data_admin()
 	{
-		$this->db->where('tb_pembimbing.NIP', $id);
+		$role = 'Admin';
+		$this->db->where('ROLE', $role);
 		$this->db->from('tb_pembimbing');
-		$this->db->join('tb_akun', 'tb_akun.SISWA_ID = tb_pembimbing.NIP');
-		$this->db->order_by('tb_pembimbing.NIP', 'ASC');
+		$this->db->join('tb_akun_admin', 'tb_akun_admin.PEMBIMBING_ID = tb_pembimbing.PEMBIMBING_ID');
+		$this->db->order_by('tb_pembimbing.PEMBIMBING_ID', 'ASC');
+
+		return $this->db->get()->result();
+	}
+
+	public function get_detail_petugas($id)
+	{
+		$this->db->where('tb_pembimbing.PEMBIMBING_ID', $id);
+		$this->db->from('tb_pembimbing');
+		$this->db->join('tb_akun_admin', 'tb_akun_admin.PEMBIMBING_ID = tb_pembimbing.PEMBIMBING_ID');
+		$this->db->order_by('tb_pembimbing.PEMBIMBING_ID', 'ASC');
+
+		return $this->db->get()->row();
+	}
+
+	public function get_profil_operator($id)
+	{
+		$this->db->select('*');
+		$this->db->where('tb_pembimbing.PEMBIMBING_ID', $id);
+		$this->db->from('tb_pembimbing');
+		$this->db->join('tb_akun_admin', 'tb_akun_admin.PEMBIMBING_ID = tb_pembimbing.PEMBIMBING_ID');
 
 		return $this->db->get()->row();
 	}
@@ -68,9 +111,16 @@ class Admin_model extends CI_Model {
 		return $this->db->from('tb_akun')->where('STATUS', $status)->count_all_results();
 	}
 
-	public function total_petugas()
+	public function total_admin()
 	{
-		return $this->db->from('tb_akun_admin')->count_all_results();
+		$role = 'Admin';
+		return $this->db->from('tb_akun_admin')->where('ROLE', $role)->count_all_results();
+	}
+
+	public function total_operator()
+	{
+		$role = 'Operator';
+		return $this->db->from('tb_akun_admin')->where('ROLE', $role)->count_all_results();
 	}
 
 	public function verified($id)
@@ -94,6 +144,25 @@ class Admin_model extends CI_Model {
 				 ->delete('tb_siswa');
 
 		if($this->db->affected_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function add_pembimbing($id)
+	{
+		$data = array('SISWA_ID'	 		=> $id,
+					  'PEMBIMBING_ID' 		=> $this->input->post('pembimbing')
+					);
+
+		$this->db->insert('tb_detail', $data);
+		$id_detail = $this->db->insert_id();
+
+		$data1 = array('DETAIL_ID' => $id_detail );
+		$this->db->where('SISWA_ID', $id)->update('tb_siswa', $data1);
+
+		if ($this->db->affected_rows() > 0) {
 			return TRUE;
 		} else {
 			return FALSE;
@@ -129,7 +198,7 @@ class Admin_model extends CI_Model {
 					   'PASSWORD' 		=> $this->input->post('password'),
 					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
 					   'ROLE'			=> 'Siswa',
-					   'STATUS'			=> 'verified'
+					   'STATUS'			=> 'unverified'
 						);
 
 		$this->db->insert('tb_akun', $data1);
@@ -237,8 +306,7 @@ class Admin_model extends CI_Model {
 		}
 	}
 
-
-	public function tambah_petugas($identitas)
+	public function tambah_admin($identitas)
 	{
 		$data1 = array('USERNAME' 		=> $this->input->post('username'),
 					   'PASSWORD' 		=> $this->input->post('password'),
@@ -271,14 +339,37 @@ class Admin_model extends CI_Model {
 		}
 	}
 
-	public function get_detail_petugas($id)
+	public function tambah_operator($identitas)
 	{
-		$this->db->where('tb_pembimbing.PEMBIMBING_ID', $id);
-		$this->db->from('tb_pembimbing');
-		$this->db->join('tb_akun_admin', 'tb_akun_admin.PEMBIMBING_ID = tb_pembimbing.PEMBIMBING_ID');
-		$this->db->order_by('tb_pembimbing.PEMBIMBING_ID', 'ASC');
+		$data1 = array('USERNAME' 		=> $this->input->post('username'),
+					   'PASSWORD' 		=> $this->input->post('password'),
+					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
+					   'ROLE'			=> 'Operator',
+						);
 
-		return $this->db->get()->row();
+		$this->db->insert('tb_akun_admin', $data1);
+		$id_akun = $this->db->insert_id();
+
+		$data = array('NIP' 						=> $this->input->post('nip'),
+					  'ACCOUNT_ID'					=> $id_akun,
+					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
+					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
+					  'NOHP_PEMBIMBING'				=> $this->input->post('no_hp'),
+					  'ALAMAT_PEMBIMBING'			=> $this->input->post('alamat'),
+					  'FOTOIDENTITAS_PEMBIMBING'	=> $identitas['file_name']
+					  );
+	
+		$this->db->insert('tb_pembimbing', $data);
+		$id_pembimbing = $this->db->insert_id();
+
+		$data2 = array('PEMBIMBING_ID' => $id_pembimbing);
+		$this->db->where('ACCOUNT_ADMIN_ID', $id_akun)->update('tb_akun_admin', $data2);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 
 	public function edit_petugas($id)
@@ -339,6 +430,34 @@ class Admin_model extends CI_Model {
 		$this->db->where('PEMBIMBING_ID', $id)->delete('tb_akun_admin');
 
 		if($this->db->affected_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function update_role($id)
+	{
+		$data = array('ROLE' => $this->input->post('role'));
+
+		$this->db->where('PEMBIMBING_ID', $id)->update('tb_akun_admin', $data);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function update_foto($foto)
+	{
+		$id = $this->session->userdata('PEMBIMBING_ID');
+
+		$data = array('FOTODIRI_PEMBIMBING' => $foto['file_name'] );
+
+		$this->db->where('PEMBIMBING_ID', $id)->update('tb_pembimbing', $data);
+
+		if ($this->db->affected_rows() > 0) {
 			return TRUE;
 		} else {
 			return FALSE;
