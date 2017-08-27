@@ -265,7 +265,7 @@ class Admin extends CI_Controller {
 			if($this->session->userdata('ROLE') != 'Siswa'){
 				$id_p = $this->session->userdata('PEMBIMBING_ID');
 				$data['petugas'] = $this->admin_model->get_pembimbing($id_p);	
-				$data['petugas'] = $this->admin_model->get_detail_petugas($id);
+				$data['petugas1'] = $this->admin_model->get_detail_petugas($id);
 				$data['profil'] = $this->admin_model->get_profil_operator($id);
 				$data['main_view'] = 'edit_operator_view';
 				$this->load->view('template', $data);
@@ -284,7 +284,7 @@ class Admin extends CI_Controller {
 			if($this->session->userdata('ROLE') != 'Siswa'){
 				$id_p = $this->session->userdata('PEMBIMBING_ID');
 				$data['petugas'] = $this->admin_model->get_pembimbing($id_p);	
-				$data['petugas'] = $this->admin_model->get_detail_petugas($id);
+				$data['petugas1'] = $this->admin_model->get_detail_petugas($id);
 				$data['profil'] = $this->admin_model->get_profil_operator($id);
 				$data['main_view'] = 'edit_admin_view';
 				$this->load->view('template', $data);
