@@ -140,6 +140,13 @@ class Admin_model extends CI_Model {
 	{
 		$this->db->where('SISWA_ID', $id)
 				 ->delete('tb_akun');
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$this->db->where('SISWA_ID', $id)
 				 ->delete('tb_siswa');
 
@@ -159,6 +166,12 @@ class Admin_model extends CI_Model {
 		$this->db->insert('tb_detail', $data);
 		$id_detail = $this->db->insert_id();
 
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$data1 = array('DETAIL_ID' => $id_detail );
 		$this->db->where('SISWA_ID', $id)->update('tb_siswa', $data1);
 
@@ -172,6 +185,13 @@ class Admin_model extends CI_Model {
 	public function del_siswa($id)
 	{
 		$this->db->where('SISWA_ID', $id)->delete('tb_siswa');
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$this->db->where('SISWA_ID', $id)->delete('tb_akun');
 
 		if($this->db->affected_rows() > 0){
@@ -203,6 +223,12 @@ class Admin_model extends CI_Model {
 
 		$this->db->insert('tb_akun', $data1);
 		$id_akun = $this->db->insert_id();
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 
 		$data = array('SISWA_ID' 			=> NULL,
 					  'ACCOUNT_ID'			=> $id_akun,
@@ -246,6 +272,12 @@ class Admin_model extends CI_Model {
 
 		$this->db->where('SISWA_ID', $id)->update('tb_akun', $data1);
 
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$data = array('NIS'					=> $this->input->post('nis'),
 					  'NAMA_SISWA'			=> $this->input->post('nama'),
 					  'JENKEL_SISWA'		=> $this->input->post('jenkel'),
@@ -279,6 +311,12 @@ class Admin_model extends CI_Model {
 						);
 
 		$this->db->where('SISWA_ID', $id)->update('tb_akun', $data1);
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 
 		$data = array('NIS'					=> $this->input->post('nis'),
 					  'NAMA_SISWA'			=> $this->input->post('nama'),
@@ -317,6 +355,12 @@ class Admin_model extends CI_Model {
 		$this->db->insert('tb_akun_admin', $data1);
 		$id_akun = $this->db->insert_id();
 
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$data = array('NIP' 						=> $this->input->post('nip'),
 					  'ACCOUNT_ID'					=> $id_akun,
 					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
@@ -351,6 +395,12 @@ class Admin_model extends CI_Model {
 		$this->db->insert('tb_akun_admin', $data1);
 		$id_akun = $this->db->insert_id();
 
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$data = array('NIP' 						=> $this->input->post('nip'),
 					  'ACCOUNT_ID'					=> $id_akun,
 					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
@@ -383,6 +433,12 @@ class Admin_model extends CI_Model {
 
 		$this->db->where('PEMBIMBING_ID', $id)->update('tb_akun_admin', $data1);
 
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$data = array('NIP'							=> $this->input->post('nip'),
 					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
 					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
@@ -408,6 +464,12 @@ class Admin_model extends CI_Model {
 
 		$this->db->where('PEMBIMBING_ID', $id)->update('tb_akun_admin', $data1);
 
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$data = array('NIP'							=> $this->input->post('nip'),
 					  'NAMA_PEMBIMBING'				=> $this->input->post('nama'),
 					  'JENKEL_PEMBIMBING'			=> $this->input->post('jenkel'),
@@ -429,6 +491,13 @@ class Admin_model extends CI_Model {
 	public function del_petugas($id)
 	{
 		$this->db->where('PEMBIMBING_ID', $id)->delete('tb_pembimbing');
+
+		if ($this->db->affected_rows() > 0) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+
 		$this->db->where('PEMBIMBING_ID', $id)->delete('tb_akun_admin');
 
 		if($this->db->affected_rows() > 0){
