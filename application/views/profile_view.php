@@ -99,7 +99,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="img-circle" alt="User Image" style="height: 45px">
         </div>
         <div class="pull-left info">
           <p><?php echo $profil->NAMA_SISWA; ?></p>

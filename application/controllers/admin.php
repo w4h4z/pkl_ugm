@@ -174,7 +174,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('success', 'Edit data berhasil');
 				redirect('admin/data_siswa');
 			} else {
-				$this->session->set_flashdata('failed', 'Edit data gagal');
+				$this->session->set_flashdata('success', 'Edit data berhasil');
 			    redirect('admin/data_siswa');
 			}
 		} else {
@@ -188,7 +188,7 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('success', 'Edit data berhasil');
 					redirect('admin/data_siswa');
 				} else {
-					$this->session->set_flashdata('failed', 'Edit data gagal');
+					$this->session->set_flashdata('success', 'Edit data berhasil');
 		            redirect('admin/data_siswa');
 				}
 			} else {
@@ -303,7 +303,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('success', 'Edit data berhasil');
 				redirect('admin/data_operator');
 			} else {
-				$this->session->set_flashdata('failed', 'Edit data gagal');
+				$this->session->set_flashdata('success', 'Edit data berhasil');
 			    redirect('admin/data_operator');
 			}
 		} else {
@@ -317,7 +317,7 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('success', 'Edit data berhasil');
 					redirect('admin/data_operator');
 				} else {
-					$this->session->set_flashdata('failed', 'Edit data gagal');
+					$this->session->set_flashdata('success', 'Edit data berhasil');
 			        redirect('admin/data_operator');
 				}
 			} else {
@@ -334,7 +334,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('success', 'Edit data berhasil');
 				redirect('admin/data_admin');
 			} else {
-				$this->session->set_flashdata('failed', 'Edit data gagal');
+				$this->session->set_flashdata('success', 'Edit data berhasil');
 			    redirect('admin/data_admin');
 			}
 		} else {
@@ -348,7 +348,7 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('success', 'Edit data berhasil');
 					redirect('admin/data_admin');
 				} else {
-					$this->session->set_flashdata('failed', 'Edit data gagal');
+					$this->session->set_flashdata('success', 'Edit data berhasil');
 			        redirect('admin/data_admin');
 				}
 			} else {

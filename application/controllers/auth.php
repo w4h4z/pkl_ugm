@@ -180,7 +180,7 @@ class Auth extends CI_Controller {
         	$this->session->set_flashdata('tgl_selesai_error', $this->input->post('tgl_selesai'));
 
             $this->session->set_flashdata('failed', 'Captcha code was not match, please try again');
-		    redirect('auth/register');
+		    redirect('auth/register_siswa');
         }
 	}
 
