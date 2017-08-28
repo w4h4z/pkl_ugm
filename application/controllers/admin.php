@@ -49,6 +49,7 @@ class Admin extends CI_Controller {
 				$data['petugas'] = $this->admin_model->get_pembimbing($id);	
 				$data['siswa'] = $this->admin_model->get_data_siswa();
 				$data['profil'] = $this->admin_model->get_profil_operator($id);
+				$data['pembimbing'] = $this->admin_model->get_all_pembimbing();	
 				$data['main_view'] = 'table_siswa_view';
 				$this->load->view('template', $data);
 			} else {
@@ -454,7 +455,7 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('success', 'Edit data berhasil');
 				redirect('admin/data_operator');
 			} else {
-				$this->session->set_flashdata('failed', 'Edit data gagal');
+				$this->session->set_flashdata('success', 'Edit data berhasil');
 			    redirect('admin/data_operator');
 			}
 		} else {
@@ -468,7 +469,7 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('success', 'Edit data berhasil');
 					redirect('admin/data_operator');
 				} else {
-					$this->session->set_flashdata('failed', 'Edit data gagal');
+					$this->session->set_flashdata('success', 'Edit data berhasil');
 			        redirect('admin/data_operator');
 				}
 			} else {

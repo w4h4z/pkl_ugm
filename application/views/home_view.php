@@ -73,7 +73,7 @@
 	           <div class="row">
 	            <h3 style="text-align: center; font-weight: 600; margin-bottom: 20px">Welcome</h3>
 	            <a href="<?php echo base_url(); ?>index.php/auth/login_siswa" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-info" style="margin-bottom: 18px; letter-spacing: 3px; font-weight: 600">LOGIN</a><br>
-	            <a href="<?php echo base_url(); ?>index.php/auth/user_manual" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-warning" style="margin-bottom: 18px; letter-spacing: 3px;font-weight: 600">USER MANUAL</a>
+	            <a href="<?php echo base_url(); ?>index.php/siswa/user_manual" target="_blank" class="btn btn-lg col-xs-10 col-xs-offset-1 col-lg-10 col-lg-offset-1 btn-warning" style="margin-bottom: 18px; letter-spacing: 3px;font-weight: 600">USER MANUAL</a>
 	           </div>
 	          </div>
 	          <!-- /.box-body -->

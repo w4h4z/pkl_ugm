@@ -24,7 +24,7 @@
       <div class="form-group has-feedback">
         <label class="col-md-3 control-label">Username</label>
         <div class="col-md-9">
-        <input type="text" class="form-control" placeholder="Username" name="username" id="usernmae" value="<?php echo $this->session->flashdata('username_error'); ?>" required>
+        <input type="text" class="form-control" placeholder="Username" name="username" id="username" value="<?php echo $this->session->flashdata('username_error'); ?>" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
       </div>

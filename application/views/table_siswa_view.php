@@ -293,6 +293,16 @@
                         <input type="date" class="form-control" name="tgl_selesai" required>
                         <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                       </div>
+                      <div class="form-group">
+                        <label>Pembimbing</label>
+                        <select class="form-control" name="pembimbing" id="pembimbing">
+                            <?php  
+                            foreach($pembimbing as $data){
+                              echo '
+                              <option value="'.$data->PEMBIMBING_ID.'">'.$data->NAMA_PEMBIMBING.'</option>
+                            ';} ?>
+                        </select>
+                      </div>
                       <div class="form-group has-feedback">
                         <label>Upload Identitas</label>
                         <input type="file" class="form-control" name="identitas" required>

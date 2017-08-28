@@ -198,8 +198,7 @@ class Admin_model extends CI_Model {
 		$data1 = array('USERNAME' 		=> $this->input->post('username'),
 					   'PASSWORD' 		=> $this->input->post('password'),
 					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
-					   'ROLE'			=> 'Siswa',
-					   'STATUS'			=> 'unverified'
+					   'ROLE'			=> 'Siswa'
 						);
 
 		$this->db->insert('tb_akun', $data1);
@@ -230,6 +229,15 @@ class Admin_model extends CI_Model {
 
 		$data2 = array('SISWA_ID' => $id_siswa);
 		$this->db->where('ACCOUNT_ID', $id_akun)->update('tb_akun', $data2);
+
+		$data3 = array('SISWA_ID' 		=> $id_siswa,
+					   'PEMBIMBING_ID' 	=> $this->input->post('pembimbing')
+					   );
+		$this->db->insert('tb_detail', $data3);
+		$id_detail = $this->db->insert_id();
+
+		$data4 = array('DETAIL_ID' => $id_detail);
+		$this->db->where('SISWA_ID', $id_siswa)->update('tb_siswa', $data4);
 
 		if ($this->db->affected_rows() > 0) {
 			return TRUE;

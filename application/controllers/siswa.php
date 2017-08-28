@@ -65,7 +65,7 @@ class Siswa extends CI_Controller {
 				$this->session->set_flashdata('success', 'Edit data berhasil');
 				redirect('siswa/profile');
 			} else {
-				$this->session->set_flashdata('failed', 'Edit data gagal');
+				$this->session->set_flashdata('success', 'Edit data berhasil');
 			    redirect('siswa/profile');
 			}
 		} else {
@@ -79,7 +79,7 @@ class Siswa extends CI_Controller {
 					$this->session->set_flashdata('success', 'Edit data berhasil');
 					redirect('siswa/profile');
 				} else {
-					$this->session->set_flashdata('failed', 'Edit data gagal');
+					$this->session->set_flashdata('success', 'Edit data berhasil');
 		            redirect('siswa/profile');
 				}
 			} else {
@@ -108,6 +108,12 @@ class Siswa extends CI_Controller {
 			$this->session->set_flashdata('failed', $this->upload->display_errors());
 		    redirect('siswa/profile');
 		}
+	}
+
+	public function user_manual()
+	{
+		$data['main_view'] = 'welcome_um_view';
+		$this->load->view('template_user_manual', $data);
 	}
 
 }
