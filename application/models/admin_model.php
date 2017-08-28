@@ -198,7 +198,8 @@ class Admin_model extends CI_Model {
 		$data1 = array('USERNAME' 		=> $this->input->post('username'),
 					   'PASSWORD' 		=> $this->input->post('password'),
 					   'ACCOUNT_EMAIL'	=> $this->input->post('email'),
-					   'ROLE'			=> 'Siswa'
+					   'ROLE'			=> 'Siswa',
+					   'STATUS'			=> 'verified'
 						);
 
 		$this->db->insert('tb_akun', $data1);

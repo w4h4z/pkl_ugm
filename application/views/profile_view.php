@@ -142,7 +142,7 @@
           <!-- Profile Image -->
           <div class="box box-primary container">
             <div class="box-body box-profile">
-              <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="profile-user-img img-responsive img-circle" alt="User profile picture">
+              <img src="<?php echo base_url(); ?>uploads/<?php echo $profil->FOTODIRI_SISWA; ?>" class="profile-user-img img-responsive img-circle" alt="User profile picture" style="height: 100px">
 
               <h3 class="profile-username text-center"><?php echo $profil->NAMA_SISWA; ?></h3>
               <div class="form-group">
