@@ -112,7 +112,8 @@ class Siswa extends CI_Controller {
 
 	public function user_manual()
 	{
-		$data['main_view'] = 'welcome_um_view';
+		$data['main_view'] = 'um_siswa_view';
+		$data['menu'] = 'um_menu_siswa';
 		$this->load->view('template_user_manual', $data);
 	}
 

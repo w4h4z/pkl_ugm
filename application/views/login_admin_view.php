@@ -87,7 +87,7 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
   </div>
   <!-- <input id="textinput" name="textinput" type="text" placeholder="Enter Password" class="form-control input-md"> -->
-  <div class="spacing"><a href="#"><small> Forgot Password?</small></a><br/></div>
+  <div class="spacing"><a href="#" data-toggle="modal" data-target="#forget"><small> Forgot Password?</small></a><br/></div>
   <button type="submit" class="btn btn-info btn-sm pull-right">Sign In</button>
 
 </form>
@@ -104,6 +104,31 @@
 </div>
 </div>
 </div>
+
+    <div class="modal fade" id="forget">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Forget Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                          <h3 class="text-red" style="font-weight: 600;">Please Contact Your Administrator !</h3>
+                          <small style="font-weight: 600">*Or Open Documentation</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->  
+
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>assets/AdminLTE-2.4.0/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
