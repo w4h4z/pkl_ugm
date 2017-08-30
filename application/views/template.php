@@ -139,8 +139,9 @@
           </li>
         </li>
         <li class="header">DOCUMENTATION</li>
-        <li><a href="#"><i class="fa fa-book"></i> <span>User Manual</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>About Us</span></a></li>
+        <li><a href="<?php echo base_url(); ?>index.php/admin/user_manual_operator" target="_blank"><i class="fa fa-book"></i> <span>User Manual Operator</span></a></li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>User Manual Admin</span></a></li>
+        <li><a href="http://dssdi.ugm.ac.id" target="_blank"><i class="fa fa-circle-o text-yellow"></i> <span>About Us</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Thanks To</span></a></li>
       </ul>
     </section>

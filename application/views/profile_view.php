@@ -114,7 +114,7 @@
           </a>
         </li>
         <li class="header">Manual</li>
-        <li><a href="#"><i class="fa fa-book"></i> <span>User Manual</span></a></li>
+        <li><a href="<?php echo base_url(); ?>index.php/siswa/user_manual" target="_blank"><i class="fa fa-book"></i> <span>User Manual</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
