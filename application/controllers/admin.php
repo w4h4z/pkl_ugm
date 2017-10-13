@@ -486,6 +486,13 @@ class Admin extends CI_Controller {
 		$this->load->view('template_user_manual', $data);
 	}
 
+	public function user_manual_admin()
+	{
+		$data['main_view'] = 'um_admin_view';
+		$data['menu'] = 'um_menu_admin';
+		$this->load->view('template_user_manual', $data);
+	}
+
 }
 
 /* End of file admin.php */
